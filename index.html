@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OX-System — нейросеть читает ваш код как атакующий</title>
-  <meta name="description" content="OX-System — платформа security-ревью веб-сервисов ИИ-агентами: ревью кода, ревью развёртки и пентест в песочнице. Локальные и облачные нейросети." />
-  <meta name="theme-color" content="#07090d" />
-  <meta property="og:title" content="OX-System" />
+  <title>ZDC Systems — нейросеть читает ваш код как атакующий</title>
+  <meta name="description" content="ZDC Systems — платформа security-ревью веб-сервисов ИИ-агентами: ревью кода, ревью развёртки и пентест в песочнице. Локальные и облачные нейросети." />
+  <meta name="theme-color" content="#050806" />
+  <meta property="og:title" content="ZDC Systems" />
   <meta property="og:description" content="Security-ревью веб-сервисов ИИ-агентами: код, развёртка, пентест в песочнице." />
-  <meta property="og:image" content="https://ox-systems.github.io/assets/og.png" />
+  <meta property="og:image" content="https://zdc-systems.github.io/assets/og.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:type" content="website" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -19,7 +19,7 @@
   <script>
     // Тема до первой отрисовки — без вспышки.
     try {
-      const t = localStorage.getItem('oxs-landing-theme');
+      const t = localStorage.getItem('zdc-landing-theme');
       if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
     } catch (_) {}
   </script>
@@ -30,9 +30,8 @@
 
   <!-- ============ Шапка ============ -->
   <header class="top">
-    <a class="brand" href="#top" aria-label="OX-System">
-      <svg class="shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/><path class="tick" d="m8.5 12 2.5 2.5 4.5-5"/></svg>
-      <span>OX<b>-</b>System</span>
+    <a class="brand" href="#top" aria-label="ZDC Systems">
+      <svg class="logo" viewBox="0 0 916 252" aria-hidden="true"><path class="logo-w" transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)" d="M1163 2211 c-131 -120 -246 -228 -257 -239 l-18 -21 1068 1 c588 0 1077 3 1086 7 15 5 139 119 406 373 l104 98 -1076 0 -1076 0 -237 -219z M6282 2178 l-262 -252 0 -671 0 -671 263 -252 262 -252 756 3 756 2 242 235 243 235 -857 3 -857 2 -21 15 c-11 8 -83 76 -159 151 l-138 137 0 391 0 391 150 150 150 150 794 5 793 5 54 47 c30 26 142 133 249 238 l195 189 -1176 1 -1175 0 -262 -252z M3335 2019 c-115 -111 -220 -205 -233 -210 -13 -5 -188 -9 -389 -9 l-366 0 -216 -161 c-307 -229 -1267 -958 -1726 -1310 -49 -38 -143 -109 -208 -159 l-119 -90 1105 0 1105 0 46 38 c25 20 153 141 285 267 l239 230 -490 5 -490 5 323 232 c178 128 556 398 839 601 l515 368 3 197 c1 108 -1 197 -5 197 -5 -1 -102 -91 -218 -201z"/><path class="logo-g" transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)" d="M917 2393 c-145 -128 -467 -428 -467 -435 0 -4 44 -8 98 -8 l98 0 256 239 256 239 -30 6 c-17 3 -59 6 -94 6 l-63 0 -54 -47z M3753 2433 l-13 -5 0 -229 0 -229 641 0 640 0 87 -82 c48 -46 131 -127 184 -181 l98 -98 0 -358 0 -358 -177 -176 -178 -177 -95 0 c-52 0 -271 -3 -486 -5 l-392 -5 -11 14 -11 13 -2 624 -3 624 -65 3 c-91 4 -94 3 -250 -113 l-140 -105 0 -760 0 -760 828 0 828 0 302 291 302 291 0 598 0 598 -296 289 c-162 158 -303 291 -312 295 -19 8 -1460 9 -1479 1z M4610 1611 c-172 -53 -227 -247 -104 -367 l42 -41 -45 -182 -46 -183 14 -9 c16 -11 374 -8 384 3 4 4 -13 89 -37 190 l-45 183 33 27 c18 16 42 47 53 71 l21 43 0 50 c-1 141 -142 254 -270 215z M2892 433 c-109 -104 -237 -224 -285 -268 l-87 -80 17 -7 c10 -3 57 -7 105 -7 l88 -1 127 117 c104 95 248 228 448 415 l19 18 -117 0 -118 0 -197 -187z M8531 324 c-138 -130 -251 -241 -251 -245 0 -5 65 -9 145 -9 l145 0 233 216 c127 119 245 230 262 245 l30 29 -157 0 -157 0 -250 -236z"/></svg>
     </a>
     <nav class="links">
       <a href="#scanner" data-i18n="nav.demo">Демо</a>
@@ -50,7 +49,7 @@
       <button class="theme-btn" aria-label="Theme" title="Theme">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="sun" cx="12" cy="12" r="4.5"/><path class="rays" d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
       </button>
-      <a class="gh" href="mailto:misanaproger@gmail.com?subject=OX-System">
+      <a class="gh" href="mailto:misanaproger@gmail.com?subject=ZDC Systems">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         <span data-i18n="nav.contact">Связаться</span>
       </a>
@@ -69,11 +68,7 @@
             <span class="line" data-scramble data-i18n="hero.t2">ваш код</span>
             <span class="line accent" data-scramble data-i18n="hero.t3">как атакующий.</span>
           </h1>
-          <p class="lead" data-i18n="hero.lead">OX-System проводит ревью кода, ревью развёртки и пентест в изолированной песочнице — и выдаёт отчёт с доказательствами и исправлениями раньше, чем уязвимость найдёт кто-то другой.</p>
-          <div class="cta">
-            <a class="btn primary" href="#scanner"><span data-i18n="hero.cta1">Запустить демо-скан</span> <i>→</i></a>
-            <a class="btn ghost" href="#start" data-i18n="hero.cta2">Развернуть у себя</a>
-          </div>
+          <p class="lead" data-i18n="hero.lead">ZDC Systems проводит ревью кода, ревью развёртки и пентест в изолированной песочнице — и выдаёт отчёт с доказательствами и исправлениями раньше, чем уязвимость найдёт кто-то другой.</p>
           <ul class="chips">
             <li data-i18n="hero.c1">данные не покидают сервер с локальной моделью</li>
             <li data-i18n="hero.c2">11 провайдеров LLM</li>
@@ -136,7 +131,7 @@
         <h2 data-i18n="modes.title">Код, инфраструктура, живая атака</h2>
       </div>
       <div class="cards">
-        <article class="card tilt" style="--hue: 210">
+        <article class="card tilt" style="--hue: 125">
           <div class="card-art art-code" aria-hidden="true">
             <span></span><span></span><span class="bad"></span><span></span><span></span><span class="bad"></span><span></span>
           </div>
@@ -145,7 +140,7 @@
           <p data-i18n="modes.code.p">Нейросеть сама выбирает файлы, читает проект частями с картой всех файлов — и не путает «нет аутентификации» с middleware в соседнем модуле. Плюс gitleaks, semgrep, cargo-audit.</p>
           <ul><li>SQLi · RCE · IDOR</li><li data-i18n="modes.code.l2">секреты в истории</li><li data-i18n="modes.code.l3">уязвимые зависимости</li></ul>
         </article>
-        <article class="card tilt" style="--hue: 38">
+        <article class="card tilt" style="--hue: 160">
           <div class="card-art art-deploy" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
@@ -154,7 +149,7 @@
           <p data-i18n="modes.deploy.p">Dockerfile, compose, Kubernetes/Helm, Terraform, CI/CD, nginx. Свои правила и hadolint, tfsec, kube-score, checkov — нейросеть подтверждает и объясняет.</p>
           <ul><li>privileged · docker.sock</li><li data-i18n="modes.deploy.l2">root и образы без версии</li><li data-i18n="modes.deploy.l3">actions без SHA</li></ul>
         </article>
-        <article class="card tilt" style="--hue: 350">
+        <article class="card tilt" style="--hue: 95">
           <div class="card-art art-pentest" aria-hidden="true">
             <div class="cage"><div class="target"></div></div><div class="shot"></div><div class="shot s2"></div>
           </div>
@@ -259,7 +254,7 @@
       </div>
       <div class="orbit-wrap">
         <div class="orbit" id="orbit">
-          <div class="core"><span>OX</span></div>
+          <div class="core"><svg class="core-mark" viewBox="0 0 234 244" aria-hidden="true"><path fill="currentColor" transform="translate(0.000000,244.000000) scale(0.100000,-0.100000)" d="M213 2393 l-13 -5 0 -229 0 -229 641 0 640 0 87 -82 c48 -46 131 -127 184 -181 l98 -98 0 -358 0 -358 -177 -176 -178 -177 -95 0 c-52 0 -271 -3 -486 -5 l-392 -5 -11 14 -11 13 -2 624 -3 624 -65 3 c-91 4 -94 3 -250 -113 l-140 -105 0 -760 0 -760 828 0 828 0 302 291 302 291 0 598 0 598 -296 289 c-162 158 -303 291 -312 295 -19 8 -1460 9 -1479 1z M1070 1571 c-172 -53 -227 -247 -104 -367 l42 -41 -45 -182 -46 -183 14 -9 c16 -11 374 -8 384 3 4 4 -13 89 -37 190 l-45 183 33 27 c18 16 42 47 53 71 l21 43 0 50 c-1 141 -142 254 -270 215z"/></svg></div>
           <div class="ring r1" data-n="2"></div>
           <div class="ring r2" data-n="9"></div>
         </div>
@@ -289,7 +284,7 @@
         <div class="tabs" id="shot-tabs" role="tablist"></div>
         <div class="devices">
           <div class="browser">
-            <div class="b-bar"><i></i><i></i><i></i><span class="url">ox-system.local/<b id="shot-path">reports</b></span></div>
+            <div class="b-bar"><i></i><i></i><i></i><span class="url">zdc.local/<b id="shot-path">reports</b></span></div>
             <div class="b-view">
               <img id="shot" alt="" width="1600" height="1000" />
               <div class="progress"><i id="shot-progress"></i></div>
@@ -321,7 +316,7 @@
         <div class="flip"><div class="f-in"><div class="f-front"><b>scope</b><span data-i18n="pr.3">Подписанный scope или цель с истекающим сроком.</span></div><div class="f-back"><code>scope: target not authorized<br>→ pentest skipped</code></div></div></div>
         <div class="flip"><div class="f-in"><div class="f-front"><b>audit-log</b><span data-i18n="pr.4">Каждое активное действие — в файл и в БД.</span></div><div class="f-back"><code>{"tool":"pentest.web_scan",<br> "target":"http://target:8000"}</code></div></div></div>
         <div class="flip"><div class="f-in"><div class="f-front"><b>brute-force</b><span data-i18n="pr.5">10 неудач за 5 минут — 429, счётчик в Postgres переживает рестарт.</span></div><div class="f-back"><code>HTTP/1.1 429 Too Many Requests<br>Retry-After: 300</code></div></div></div>
-        <div class="flip"><div class="f-in"><div class="f-front"><b>least privilege</b><span data-i18n="pr.6">Роли user/worker, образы не от root, actions по SHA.</span></div><div class="f-back"><code>USER oxs (10001)<br>permissions: contents: read</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>least privilege</b><span data-i18n="pr.6">Роли user/worker, образы не от root, actions по SHA.</span></div><div class="f-back"><code>USER zdc (10001)<br>permissions: contents: read</code></div></div></div>
       </div>
     </section>
 
@@ -343,7 +338,7 @@
       <div class="head">
         <p class="kicker">09 / <span data-i18n="st.kicker">локальная версия</span></p>
         <h2 data-i18n="st.title">Работает у вас, а не у нас</h2>
-        <p class="sub" data-i18n="st.sub">Сейчас OX-System — только локальная версия: ставится на ваш сервер, код и отчёты не покидают периметр. Облачной версии пока нет.</p>
+        <p class="sub" data-i18n="st.sub">Сейчас ZDC Systems — только локальная версия: ставится на ваш сервер, код и отчёты не покидают периметр. Облачной версии пока нет.</p>
       </div>
       <ol class="plan">
         <li><b data-i18n="st.p1.t">Пишете нам</b><span data-i18n="st.p1.p">Рассказываете о стеке и о том, что хотите проверить: код, инфраструктуру, стенд для пентеста.</span></li>
@@ -354,12 +349,12 @@
         <div class="contact-copy">
           <p class="kicker" data-i18n="st.c.kicker">сотрудничество</p>
           <h3 data-i18n="st.c.title">Пилот, интеграция, инвестиции — пишите</h3>
-          <p data-i18n="st.c.p">Мы превращаем OX-System в стартап и ищем первых клиентов и партнёров. Предложения о сотрудничестве — на почту:</p>
+          <p data-i18n="st.c.p">Мы превращаем ZDC Systems в стартап и ищем первых клиентов и партнёров. Предложения о сотрудничестве — на почту:</p>
         </div>
         <div class="contact-mail">
-          <a class="mail" href="mailto:misanaproger@gmail.com?subject=OX-System">misanaproger@gmail.com</a>
+          <a class="mail" href="mailto:misanaproger@gmail.com?subject=ZDC Systems">misanaproger@gmail.com</a>
           <div class="mail-actions">
-            <a class="btn primary" href="mailto:misanaproger@gmail.com?subject=OX-System"><span data-i18n="st.c.write">Написать</span> <i>→</i></a>
+            <a class="btn primary" href="mailto:misanaproger@gmail.com?subject=ZDC Systems"><span data-i18n="st.c.write">Написать</span> <i>→</i></a>
             <button class="btn ghost" id="copy-mail" data-mail="misanaproger@gmail.com" data-i18n="st.c.copy">Скопировать адрес</button>
           </div>
         </div>
@@ -369,13 +364,13 @@
     <!-- ============ Финал ============ -->
     <section class="finale">
       <h2><span data-i18n="fin.t1">Найдите уязвимость</span><br><em data-i18n="fin.t2">раньше, чем её найдут.</em></h2>
-      <a class="btn primary big" href="mailto:misanaproger@gmail.com?subject=OX-System"><span data-i18n="fin.cta">Предложить сотрудничество</span> <i>→</i></a>
+      <a class="btn primary big" href="mailto:misanaproger@gmail.com?subject=ZDC Systems"><span data-i18n="fin.cta">Предложить сотрудничество</span> <i>→</i></a>
       <p class="warn" data-i18n="fin.warn">⚠ Активное тестирование — только систем, на которые у вас есть письменное разрешение владельца.</p>
     </section>
   </main>
 
   <footer class="foot">
-    <span>© 2026 OX-System</span>
+    <span>© 2026 ZDC Systems</span>
     <a class="foot-mail" href="mailto:misanaproger@gmail.com">misanaproger@gmail.com</a>
     <span class="egg" data-i18n="foot.egg">↑ ↑ ↓ ↓ ← → ← → B A</span>
   </footer>

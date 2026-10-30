@@ -1,8 +1,8 @@
-// Лендинг OX-System: без сборки и зависимостей — открывается прямо с GitHub Pages.
+// Лендинг ZDC Systems: без сборки и зависимостей — открывается прямо с GitHub Pages.
 (() => {
   'use strict';
 
-  const I18N = window.OXS_I18N;
+  const I18N = window.ZDC_I18N;
   const root = document.documentElement;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -15,7 +15,7 @@
     set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} },
   };
   const guessLang = () => {
-    const saved = store.get('oxs-landing-lang');
+    const saved = store.get('zdc-landing-lang');
     if (saved && I18N[saved]) return saved;
     const nav = (navigator.language || 'ru').slice(0, 2);
     return I18N[nav] ? nav : 'en';
@@ -27,7 +27,7 @@
   function applyLang(next) {
     lang = next;
     root.lang = lang;
-    store.set('oxs-landing-lang', lang);
+    store.set('zdc-landing-lang', lang);
     $$('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
     $$('.lang button').forEach((b) => b.classList.toggle('on', b.dataset.lang === lang));
     langListeners.forEach((fn) => fn());
@@ -39,7 +39,7 @@
   $('.theme-btn').addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
-    store.set('oxs-landing-theme', next);
+    store.set('zdc-landing-theme', next);
     themeListeners.forEach((fn) => fn());
   });
 
@@ -121,7 +121,9 @@
       const dt = Math.min(64, now - t0); t0 = now;
       const css = getComputedStyle(root);
       const fg = css.getPropertyValue('--code-dim').trim();
-      const red = css.getPropertyValue('--crit').trim();
+      // Найденные «уязвимые» строки подсвечиваются зелёным, как в матрице.
+      const hit = css.getPropertyValue('--c1').trim();
+      const dark = root.dataset.theme !== 'light';
       const beamC = css.getPropertyValue('--c1').trim();
       ctx.clearRect(0, 0, W, H);
       const beamY = ((now / 4200) % 1) * (H + 160) - 80;
@@ -144,13 +146,15 @@
           ln.lit = Math.max(0, ln.lit - dt / 3200);
           const x = s.x + ln.indent * 7;
           if (ln.lit > 0) {
-            ctx.globalAlpha = 0.25 * ln.lit; ctx.fillStyle = red;
+            ctx.globalAlpha = 0.18 * ln.lit; ctx.fillStyle = hit;
             ctx.fillRect(x - 6, y - lineH / 2 + 2, Math.min(ctx.measureText(ln.text).width + 12, W / cols - 30), lineH - 4);
-            ctx.globalAlpha = 0.4 + 0.6 * ln.lit; ctx.fillStyle = red;
+            ctx.globalAlpha = 0.4 + 0.6 * ln.lit; ctx.fillStyle = hit;
+            if (dark) { ctx.shadowColor = hit; ctx.shadowBlur = 8 * ln.lit; }
             ctx.fillText(ln.text, x, y);
             ctx.font = `700 ${W < 700 ? 9 : 10}px "JetBrains Mono", monospace`;
             ctx.fillText('▲ ' + ln.sev, x, y - lineH / 2 - 1);
             ctx.font = `${W < 700 ? 11 : 13}px "JetBrains Mono", monospace`;
+            ctx.shadowBlur = 0;
           } else {
             ctx.globalAlpha = 1; ctx.fillStyle = fg; ctx.fillText(ln.text, x, y);
           }
@@ -472,7 +476,7 @@
     themeListeners.push(() => { show(idx, true); setPhone(); });
     langListeners.push(() => { img.alt = t('shot.' + SHOTS[idx][0]); });
     show(0, true); setPhone();
-    phone.alt = 'OX-System mobile';
+    phone.alt = 'ZDC Systems mobile';
     img.addEventListener('click', () => lightbox(img.src, img.alt));
     phone.addEventListener('click', () => lightbox(phone.src, phone.alt));
   }

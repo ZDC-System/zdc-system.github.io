@@ -1,43 +1,50 @@
 /* ============================================================
-   OX-System — лендинг. Все цвета — через токены (как в дашборде).
+   ZDC Systems — лендинг. Все цвета — через токены (как в дашборде).
    ============================================================ */
 :root {
-  --bg: #06080c;
-  --bg2: #0b0f16;
+  --bg: #050806;
+  --bg2: #08100b;
   --panel: rgba(255, 255, 255, .035);
   --panel2: rgba(255, 255, 255, .06);
   --line: rgba(255, 255, 255, .09);
-  --fg: #e9eef6;
-  --mut: #8b95a7;
-  --c1: #4f8cff;
-  --c2: #6ff0c4;
+  --fg: #e6eee8;
+  --mut: #8b998f;
+  /* Палитра логотипа ZDC: зелёный + мятный. */
+  --c1: #5ef952;
+  --c2: #2ee6a8;
+  /* Текст на заливке акцентом: на ярком зелёном — тёмный. */
+  --on-c1: #04140a;
+  --logo-green: #5ef952;
   --crit: #ff4d5e;
   --high: #ff8a3d;
   --med: #f5c542;
   --low: #5b9dff;
-  --code-dim: rgba(150, 170, 205, .16);
+  /* Код в фоне hero — зелёный, «как в матрице». */
+  --code-dim: rgba(94, 249, 82, .17);
   --shadow: 0 30px 80px -30px rgba(0, 0, 0, .8);
-  --glass: rgba(10, 13, 19, .72);
+  --glass: rgba(6, 12, 8, .72);
   --r: 20px;
   --mono: "JetBrains Mono", ui-monospace, monospace;
   --display: "Unbounded", "Manrope", system-ui, sans-serif;
   color-scheme: dark;
 }
 :root[data-theme='light'] {
-  --bg: #f4f6fb;
-  --bg2: #eaeef6;
+  --bg: #f3f6f4;
+  --bg2: #e7eee9;
   --panel: rgba(255, 255, 255, .7);
   --panel2: #fff;
-  --line: rgba(15, 25, 45, .1);
-  --fg: #0d1322;
-  --mut: #5a6478;
-  --c1: #2563eb;
-  --c2: #0ea37a;
+  --line: rgba(15, 45, 25, .1);
+  --fg: #0f1712;
+  --mut: #57645c;
+  --c1: #15803d;
+  --c2: #0f8f68;
+  --on-c1: #ffffff;
+  --logo-green: #1fa81a;
   --crit: #e11d48;
   --high: #ea580c;
   --med: #ca8a04;
   --low: #2563eb;
-  --code-dim: rgba(40, 60, 100, .13);
+  --code-dim: rgba(21, 128, 61, .14);
   --shadow: 0 30px 70px -35px rgba(20, 40, 90, .35);
   --glass: rgba(244, 246, 251, .8);
   color-scheme: light;
@@ -62,7 +69,7 @@ a { color: inherit; }
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; cursor: pointer; }
 code, pre { font-family: var(--mono); }
-::selection { background: var(--c1); color: #fff; }
+::selection { background: var(--c1); color: var(--on-c1); }
 
 /* Зерно и прожектор за курсором */
 .grain {
@@ -86,18 +93,16 @@ code, pre { font-family: var(--mono); }
 }
 .top.scrolled { background: var(--glass); backdrop-filter: blur(14px) saturate(1.4); border-color: var(--line); padding-block: 10px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 18px var(--display); letter-spacing: -.02em; }
-.brand b { color: var(--c1); }
-.shield { width: 28px; height: 28px; }
-.shield path:first-child { fill: var(--c1); }
-.shield .tick { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 14; stroke-dashoffset: 14; animation: tick 1s .6s forwards; }
-@keyframes tick { to { stroke-dashoffset: 0 } }
+.brand .logo { display: block; height: 24px; width: auto; }
+.logo-w { fill: var(--fg); }
+.logo-g { fill: var(--logo-green); }
 .links { display: flex; gap: 4px; margin-inline: auto; }
 .links a { text-decoration: none; color: var(--mut); padding: 6px 12px; border-radius: 99px; font-weight: 500; font-size: 15px; transition: color .2s, background .2s; }
 .links a:hover { color: var(--fg); background: var(--panel2); }
 .prefs { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .lang { display: flex; border: 1px solid var(--line); border-radius: 99px; padding: 3px; }
 .lang button { border: 0; background: none; padding: 3px 9px; border-radius: 99px; font: 600 12px var(--mono); color: var(--mut); }
-.lang button.on { background: var(--c1); color: #fff; }
+.lang button.on { background: var(--c1); color: var(--on-c1); }
 .theme-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: none; display: grid; place-items: center; }
 .theme-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; transition: transform .6s; }
 :root[data-theme='light'] .theme-btn svg { transform: rotate(180deg); }
@@ -115,7 +120,7 @@ code, pre { font-family: var(--mono); }
 .btn i { font-style: normal; transition: transform .25s; }
 .btn:hover i { transform: translateX(4px); }
 .btn:active { transform: scale(.97); }
-.btn.primary { background: var(--c1); color: #fff; border-color: transparent; box-shadow: 0 10px 40px -10px var(--c1); }
+.btn.primary { background: var(--c1); color: var(--on-c1); border-color: transparent; box-shadow: 0 10px 40px -10px var(--c1); }
 .btn.primary::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
@@ -149,8 +154,7 @@ h1 .accent {
 }
 @keyframes flow { to { background-position: 200% center } }
 .lead { font-size: clamp(17px, 1.5vw, 20px); color: var(--mut); max-width: 620px; margin: 0 0 34px; }
-.cta { display: flex; flex-wrap: wrap; gap: 12px; }
-.chips { list-style: none; padding: 0; margin: 34px 0 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font: 13px var(--mono); color: var(--mut); }
+.chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font: 13px var(--mono); color: var(--mut); }
 .chips li::before { content: "✓ "; color: var(--c2); }
 
 .term {
@@ -225,7 +229,7 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 #code li.hit::after { content: "◀"; position: absolute; right: 10px; color: var(--sev); }
 #code li.focus { background: color-mix(in srgb, var(--sev) 30%, transparent); }
 @keyframes hitflash { 0% { background: color-mix(in srgb, var(--sev) 60%, transparent) } }
-.redacted { font: 700 10px var(--mono); text-transform: uppercase; color: #fff; background: var(--c2); padding: 1px 6px; border-radius: 4px; vertical-align: 2px; }
+.redacted { font: 700 10px var(--mono); text-transform: uppercase; color: var(--on-c1); background: var(--c2); padding: 1px 6px; border-radius: 4px; vertical-align: 2px; }
 .beam { position: absolute; left: 0; right: 0; top: 0; height: 60px; margin-top: -60px; pointer-events: none; opacity: 0;
   background: linear-gradient(transparent, color-mix(in srgb, var(--c1) 30%, transparent)); border-bottom: 2px solid var(--c1);
   transition: transform .1s linear, opacity .3s; box-shadow: 0 6px 24px var(--c1); }
@@ -321,7 +325,7 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 /* ============ Песочница ============ */
 .sandbox { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
 .stage { position: relative; aspect-ratio: 1.1; border-radius: 28px; border: 1px solid var(--line); overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--crit) 10%, transparent), transparent 60%),
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--c1) 10%, transparent), transparent 60%),
               repeating-linear-gradient(0deg, transparent 0 39px, var(--line) 39px 40px),
               repeating-linear-gradient(90deg, transparent 0 39px, var(--line) 39px 40px), var(--bg2); }
 .seal { position: absolute; top: 18px; left: 18px; display: flex; flex-direction: column; padding: 10px 14px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--c2) 50%, transparent); background: color-mix(in srgb, var(--c2) 10%, var(--bg2)); font: 700 11px var(--mono); color: var(--c2); text-transform: uppercase; letter-spacing: .1em; }
@@ -353,6 +357,7 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 /* ============ Орбита ============ */
 .orbit-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
 .orbit { position: relative; aspect-ratio: 1; max-width: 520px; width: 100%; margin: 0 auto; }
+.core-mark { width: 42%; height: auto; }
 .core { position: absolute; inset: 38%; border-radius: 50%; display: grid; place-items: center; font: 900 clamp(22px, 3vw, 36px) var(--display); color: #fff;
   background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--c1) 70%, #fff), var(--c1)); box-shadow: 0 0 60px var(--c1), inset 0 -10px 30px rgba(0, 0, 0, .3); animation: corepulse 3s ease-in-out infinite; }
 @keyframes corepulse { 50% { box-shadow: 0 0 100px var(--c1), inset 0 -10px 30px rgba(0, 0, 0, .3) } }
@@ -380,7 +385,7 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 /* ============ Галерея ============ */
 .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
 .tabs button { border: 1px solid var(--line); background: var(--panel); padding: 8px 14px; border-radius: 99px; font-weight: 600; font-size: 14px; color: var(--mut); transition: all .25s; }
-.tabs button.on { background: var(--c1); border-color: var(--c1); color: #fff; }
+.tabs button.on { background: var(--c1); border-color: var(--c1); color: var(--on-c1); }
 .devices { position: relative; padding-right: 120px; }
 .browser { border-radius: 18px; border: 1px solid var(--line); overflow: hidden; background: var(--bg2); box-shadow: var(--shadow); }
 .b-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); }
@@ -446,7 +451,7 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 /* ============ Финал ============ */
 .finale { position: relative; z-index: 1; text-align: center; padding: clamp(110px, 14vw, 200px) 20px clamp(80px, 10vw, 140px); overflow: hidden; }
 .finale::before { content: ""; position: absolute; left: 50%; top: 55%; width: 900px; height: 900px; translate: -50% -50%; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--crit), var(--c1)); filter: blur(120px); opacity: .22; animation: cagespin 18s linear infinite; z-index: -1; }
+  background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c1)); filter: blur(120px); opacity: .22; animation: cagespin 18s linear infinite; z-index: -1; }
 .finale h2 { font-size: clamp(36px, 6.4vw, 92px); line-height: 1; margin-bottom: 40px; }
 .finale em { font-style: normal; color: var(--mut); }
 .warn { margin: 40px auto 0; max-width: 560px; color: var(--mut); font-size: 14px; }
@@ -526,7 +531,7 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 @media (max-width: 640px) {
   .gh span { display: none; }
   .gh { padding: 8px; }
-  .brand span { font-size: 16px; }
+  .brand .logo { height: 20px; }
   .prefs { gap: 6px; }
   .grid, .facts, .numbers { grid-template-columns: 1fr; }
   .foot { flex-direction: column; gap: 8px; align-items: center; }

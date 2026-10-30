@@ -1,4 +1,4 @@
-# OX-System — лендинг
+# ZDC Systems — лендинг
 
 Статическая страница проекта для GitHub Pages: без сборки и зависимостей —
 `index.html`, `style.css`, `app.js`, `i18n.js` и скриншоты дашборда в `assets/`.
@@ -31,8 +31,8 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## Публикация
 
-1. Создать репозиторий (например, `OX-Systems/OX-Systems.github.io` — тогда адрес
-   будет `https://ox-systems.github.io/`, или любой другой — `…/имя-репо/`).
+1. Создать репозиторий (например, `ZDC-Systems/zdc-systems.github.io` — тогда адрес
+   будет `https://zdc-systems.github.io/`, или любой другой — `…/имя-репо/`).
 2. Запушить содержимое каталога в `main`.
 3. Settings → Pages → Source: **GitHub Actions**. Workflow `.github/workflows/pages.yml`
    публикует страницу при каждом пуше.
