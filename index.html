@@ -41,7 +41,7 @@
       <a href="#sandbox" data-i18n="nav.pentest">Пентест</a>
       <a href="#product" data-i18n="nav.product">Продукт</a>
       <a href="#history" data-i18n="nav.history">Развитие</a>
-      <a href="#start" data-i18n="nav.start">Запуск</a>
+      <a href="#start" data-i18n="nav.start">Сотрудничество</a>
     </nav>
     <div class="prefs">
       <div class="lang" role="group" aria-label="Language">
@@ -50,9 +50,9 @@
       <button class="theme-btn" aria-label="Theme" title="Theme">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="sun" cx="12" cy="12" r="4.5"/><path class="rays" d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
       </button>
-      <a class="gh" href="https://github.com/OX-Systems" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
-        <span>GitHub</span>
+      <a class="gh" href="mailto:misanaproger@gmail.com?subject=OX-System">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span data-i18n="nav.contact">Связаться</span>
       </a>
     </div>
   </header>
@@ -63,7 +63,7 @@
       <canvas id="codefield" aria-hidden="true"></canvas>
       <div class="hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">security-ревью ИИ-агентами · open source · Rust</span></p>
+          <p class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">security-ревью ИИ-агентами · локальная версия · Rust</span></p>
           <h1>
             <span class="line" data-scramble data-i18n="hero.t1">Нейросеть читает</span>
             <span class="line" data-scramble data-i18n="hero.t2">ваш код</span>
@@ -338,50 +338,30 @@
       </div>
     </section>
 
-    <!-- ============ Запуск ============ -->
+    <!-- ============ Локальная версия и сотрудничество ============ -->
     <section class="section" id="start">
       <div class="head">
-        <p class="kicker">09 / <span data-i18n="st.kicker">запуск</span></p>
-        <h2 data-i18n="st.title">Три команды до первого отчёта</h2>
+        <p class="kicker">09 / <span data-i18n="st.kicker">локальная версия</span></p>
+        <h2 data-i18n="st.title">Работает у вас, а не у нас</h2>
+        <p class="sub" data-i18n="st.sub">Сейчас OX-System — только локальная версия: ставится на ваш сервер, код и отчёты не покидают периметр. Облачной версии пока нет.</p>
       </div>
-      <div class="install">
-        <div class="switch" role="tablist" id="inst-tabs">
-          <button class="on" data-inst="docker">docker compose</button>
-          <button data-inst="native" data-i18n="st.native">без Docker</button>
+      <ol class="plan">
+        <li><b data-i18n="st.p1.t">Пишете нам</b><span data-i18n="st.p1.p">Рассказываете о стеке и о том, что хотите проверить: код, инфраструктуру, стенд для пентеста.</span></li>
+        <li><b data-i18n="st.p2.t">Разворачиваем</b><span data-i18n="st.p2.p">docker compose или нативная установка на Debian/Ubuntu, Fedora/RHEL, Alpine, Arch. Модель — локальная (Ollama, llama.cpp) или ваш облачный ключ.</span></li>
+        <li><b data-i18n="st.p3.t">Первый отчёт</b><span data-i18n="st.p3.p">Подключаем репозиторий или архив — и получаете отчёт с находками, доказательствами и исправлениями.</span></li>
+      </ol>
+      <div class="contact">
+        <div class="contact-copy">
+          <p class="kicker" data-i18n="st.c.kicker">сотрудничество</p>
+          <h3 data-i18n="st.c.title">Пилот, интеграция, инвестиции — пишите</h3>
+          <p data-i18n="st.c.p">Мы превращаем OX-System в стартап и ищем первых клиентов и партнёров. Предложения о сотрудничестве — на почту:</p>
         </div>
-        <div class="code-card">
-          <button class="copy" id="copy" data-i18n="st.copy">Копировать</button>
-          <pre id="inst-docker"><span class="c"># 1. исходники рядом</span>
-mkdir ox-system &amp;&amp; cd ox-system
-for r in analitics_service oxs_mcp oxs_llm dashboard; do
-  git clone https://github.com/OX-Systems/$r.git
-done
-
-<span class="c"># 2. токены</span>
-cd analitics_service/deploy
-echo "API_TOKEN=$(openssl rand -hex 32)"         &gt;  .env
-echo "WORKER_TOKEN=$(openssl rand -hex 32)"      &gt;&gt; .env
-echo "POSTGRES_PASSWORD=$(openssl rand -hex 32)" &gt;&gt; .env
-
-<span class="c"># 3. поехали → http://127.0.0.1:3000</span>
-docker compose up -d --build</pre>
-          <pre id="inst-native" hidden><span class="c"># Debian/Ubuntu · Fedora/RHEL · Alpine · Arch</span>
-git clone https://github.com/OX-Systems/deploy_scripts.git
-cd deploy_scripts
-
-<span class="c"># зависимости, Rust, PostgreSQL, токены, сборка, анализаторы</span>
-./setup.sh
-
-<span class="c"># сервер + воркер + дашборд</span>
-./start.sh start
-./start.sh status</pre>
-        </div>
-        <div class="repos">
-          <a href="https://github.com/OX-Systems/oxs_mcp" target="_blank" rel="noopener"><b>oxs_mcp</b><span data-i18n="st.r.mcp">MCP-инструменты, воркер, песочница</span></a>
-          <a href="https://github.com/OX-Systems/oxs_llm" target="_blank" rel="noopener"><b>oxs_llm</b><span data-i18n="st.r.llm">клиент к 11 провайдерам LLM</span></a>
-          <a href="https://github.com/OX-Systems/analitics_service" target="_blank" rel="noopener"><b>analitics_service</b><span data-i18n="st.r.srv">сервер отчётов: actix-web + Postgres</span></a>
-          <a href="https://github.com/OX-Systems/dashboard" target="_blank" rel="noopener"><b>dashboard</b><span data-i18n="st.r.dash">React 19 + Vite, ru/en/uz</span></a>
-          <a href="https://github.com/OX-Systems/deploy_scripts" target="_blank" rel="noopener"><b>deploy_scripts</b><span data-i18n="st.r.dep">нативная установка одной командой</span></a>
+        <div class="contact-mail">
+          <a class="mail" href="mailto:misanaproger@gmail.com?subject=OX-System">misanaproger@gmail.com</a>
+          <div class="mail-actions">
+            <a class="btn primary" href="mailto:misanaproger@gmail.com?subject=OX-System"><span data-i18n="st.c.write">Написать</span> <i>→</i></a>
+            <button class="btn ghost" id="copy-mail" data-mail="misanaproger@gmail.com" data-i18n="st.c.copy">Скопировать адрес</button>
+          </div>
         </div>
       </div>
     </section>
@@ -389,13 +369,14 @@ cd deploy_scripts
     <!-- ============ Финал ============ -->
     <section class="finale">
       <h2><span data-i18n="fin.t1">Найдите уязвимость</span><br><em data-i18n="fin.t2">раньше, чем её найдут.</em></h2>
-      <a class="btn primary big" href="https://github.com/OX-Systems" target="_blank" rel="noopener"><span data-i18n="fin.cta">Открыть на GitHub</span> <i>↗</i></a>
+      <a class="btn primary big" href="mailto:misanaproger@gmail.com?subject=OX-System"><span data-i18n="fin.cta">Предложить сотрудничество</span> <i>→</i></a>
       <p class="warn" data-i18n="fin.warn">⚠ Активное тестирование — только систем, на которые у вас есть письменное разрешение владельца.</p>
     </section>
   </main>
 
   <footer class="foot">
     <span>© 2026 OX-System</span>
+    <a class="foot-mail" href="mailto:misanaproger@gmail.com">misanaproger@gmail.com</a>
     <span class="egg" data-i18n="foot.egg">↑ ↑ ↓ ↓ ← → ← → B A</span>
   </footer>
 

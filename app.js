@@ -594,20 +594,13 @@
     }
   }
 
-  // ---------------------------------------------------------------- установка
+  // ---------------------------------------------------------------- контакт
   function install() {
-    let cur = 'docker';
-    $$('#inst-tabs button').forEach((b) => b.addEventListener('click', () => {
-      cur = b.dataset.inst;
-      $$('#inst-tabs button').forEach((x) => x.classList.toggle('on', x === b));
-      $('#inst-docker').hidden = cur !== 'docker';
-      $('#inst-native').hidden = cur !== 'native';
-    }));
-    $('#copy').addEventListener('click', async () => {
-      const text = $('#inst-' + cur).textContent;
-      try { await navigator.clipboard.writeText(text); toast(t('st.copied')); }
+    const btn = $('#copy-mail');
+    btn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(btn.dataset.mail); toast(t('st.copied')); }
       catch (_) {
-        const r = document.createRange(); r.selectNodeContents($('#inst-' + cur));
+        const r = document.createRange(); r.selectNodeContents($('.contact .mail'));
         getSelection().removeAllRanges(); getSelection().addRange(r);
       }
     });
