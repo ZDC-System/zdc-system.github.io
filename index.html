@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OX-System — нейросеть читает ваш код как атакующий</title>
+  <meta name="description" content="OX-System — платформа security-ревью веб-сервисов ИИ-агентами: ревью кода, ревью развёртки и пентест в песочнице. Локальные и облачные нейросети." />
+  <meta name="theme-color" content="#07090d" />
+  <meta property="og:title" content="OX-System" />
+  <meta property="og:description" content="Security-ревью веб-сервисов ИИ-агентами: код, развёртка, пентест в песочнице." />
+  <meta property="og:image" content="https://ox-systems.github.io/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Manrope:wght@400;500;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // Тема до первой отрисовки — без вспышки.
+    try {
+      const t = localStorage.getItem('oxs-landing-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (_) {}
+  </script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="spot" aria-hidden="true"></div>
+
+  <!-- ============ Шапка ============ -->
+  <header class="top">
+    <a class="brand" href="#top" aria-label="OX-System">
+      <svg class="shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/><path class="tick" d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+      <span>OX<b>-</b>System</span>
+    </a>
+    <nav class="links">
+      <a href="#scanner" data-i18n="nav.demo">Демо</a>
+      <a href="#modes" data-i18n="nav.modes">Режимы</a>
+      <a href="#pipeline" data-i18n="nav.how">Как работает</a>
+      <a href="#sandbox" data-i18n="nav.pentest">Пентест</a>
+      <a href="#product" data-i18n="nav.product">Продукт</a>
+      <a href="#history" data-i18n="nav.history">Развитие</a>
+      <a href="#start" data-i18n="nav.start">Запуск</a>
+    </nav>
+    <div class="prefs">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="ru">RU</button><button data-lang="en">EN</button><button data-lang="uz">UZ</button>
+      </div>
+      <button class="theme-btn" aria-label="Theme" title="Theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="sun" cx="12" cy="12" r="4.5"/><path class="rays" d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      </button>
+      <a class="gh" href="https://github.com/OX-Systems" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+      <canvas id="codefield" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">security-ревью ИИ-агентами · open source · Rust</span></p>
+          <h1>
+            <span class="line" data-scramble data-i18n="hero.t1">Нейросеть читает</span>
+            <span class="line" data-scramble data-i18n="hero.t2">ваш код</span>
+            <span class="line accent" data-scramble data-i18n="hero.t3">как атакующий.</span>
+          </h1>
+          <p class="lead" data-i18n="hero.lead">OX-System проводит ревью кода, ревью развёртки и пентест в изолированной песочнице — и выдаёт отчёт с доказательствами и исправлениями раньше, чем уязвимость найдёт кто-то другой.</p>
+          <div class="cta">
+            <a class="btn primary" href="#scanner"><span data-i18n="hero.cta1">Запустить демо-скан</span> <i>→</i></a>
+            <a class="btn ghost" href="#start" data-i18n="hero.cta2">Развернуть у себя</a>
+          </div>
+          <ul class="chips">
+            <li data-i18n="hero.c1">данные не покидают сервер с локальной моделью</li>
+            <li data-i18n="hero.c2">11 провайдеров LLM</li>
+            <li>RU · EN · UZ</li>
+          </ul>
+        </div>
+
+        <div class="term" aria-label="report_worker">
+          <div class="term-bar"><i></i><i></i><i></i><span>report_worker — 87e3dc8d</span></div>
+          <pre id="term"></pre>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#ticker" aria-label="scroll"><span></span></a>
+    </section>
+
+    <!-- ============ Бегущая строка находок ============ -->
+    <div class="ticker" id="ticker" aria-hidden="true">
+      <div class="track" id="ticker-track"></div>
+    </div>
+
+    <!-- ============ Интерактивный сканер ============ -->
+    <section class="section" id="scanner">
+      <div class="head">
+        <p class="kicker">01 / <span data-i18n="scan.kicker">попробуйте</span></p>
+        <h2 data-i18n="scan.title">Найдите пять уязвимостей за пять секунд</h2>
+        <p class="sub" data-i18n="scan.sub">Небольшое Flask-приложение. Нажмите «Сканировать» — gitleaks, semgrep, правила развёртки и нейросеть пройдут по коду, а секрет будет вычищен до того, как строка уйдёт модели.</p>
+      </div>
+
+      <div class="lab">
+        <div class="editor">
+          <div class="ed-bar">
+            <span class="file">app/shop.py</span>
+            <button class="btn primary small" id="scan-btn"><span data-i18n="scan.run">Сканировать</span></button>
+          </div>
+          <div class="ed-body">
+            <div class="beam" id="beam"></div>
+            <ol id="code"></ol>
+          </div>
+        </div>
+
+        <aside class="findings">
+          <div class="meter">
+            <div class="meter-top"><span data-i18n="scan.found">Найдено</span><b id="found-count">0</b></div>
+            <div class="bar"><i class="c"></i><i class="h"></i><i class="m"></i></div>
+          </div>
+          <ul id="finding-list" aria-live="polite">
+            <li class="placeholder" data-i18n="scan.idle">Пока тихо. Подозрительно тихо…</li>
+          </ul>
+          <div class="sources">
+            <span>gitleaks</span><span>semgrep</span><span>deploy_rules</span><span>llm_review</span><span>redact</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ Три режима ============ -->
+    <section class="section" id="modes">
+      <div class="head">
+        <p class="kicker">02 / <span data-i18n="modes.kicker">три режима</span></p>
+        <h2 data-i18n="modes.title">Код, инфраструктура, живая атака</h2>
+      </div>
+      <div class="cards">
+        <article class="card tilt" style="--hue: 210">
+          <div class="card-art art-code" aria-hidden="true">
+            <span></span><span></span><span class="bad"></span><span></span><span></span><span class="bad"></span><span></span>
+          </div>
+          <code class="tag">code_review</code>
+          <h3 data-i18n="modes.code.t">Ревью кода</h3>
+          <p data-i18n="modes.code.p">Нейросеть сама выбирает файлы, читает проект частями с картой всех файлов — и не путает «нет аутентификации» с middleware в соседнем модуле. Плюс gitleaks, semgrep, cargo-audit.</p>
+          <ul><li>SQLi · RCE · IDOR</li><li data-i18n="modes.code.l2">секреты в истории</li><li data-i18n="modes.code.l3">уязвимые зависимости</li></ul>
+        </article>
+        <article class="card tilt" style="--hue: 38">
+          <div class="card-art art-deploy" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <code class="tag">deploy_review</code>
+          <h3 data-i18n="modes.deploy.t">Ревью развёртки</h3>
+          <p data-i18n="modes.deploy.p">Dockerfile, compose, Kubernetes/Helm, Terraform, CI/CD, nginx. Свои правила и hadolint, tfsec, kube-score, checkov — нейросеть подтверждает и объясняет.</p>
+          <ul><li>privileged · docker.sock</li><li data-i18n="modes.deploy.l2">root и образы без версии</li><li data-i18n="modes.deploy.l3">actions без SHA</li></ul>
+        </article>
+        <article class="card tilt" style="--hue: 350">
+          <div class="card-art art-pentest" aria-hidden="true">
+            <div class="cage"><div class="target"></div></div><div class="shot"></div><div class="shot s2"></div>
+          </div>
+          <code class="tag">pentest</code>
+          <h3 data-i18n="modes.pentest.t">Пентест в песочнице</h3>
+          <p data-i18n="modes.pentest.p">Нейросеть сама пишет Dockerfile, поднимает копию сервиса с базой рядом, ставит себе инструменты и атакует — nuclei плюс агентный цикл. Только по подписанному scope.</p>
+          <ul><li data-i18n="modes.pentest.l1">авторазвёртка с самоисправлением</li><li>nuclei · curl · sqlmap…</li><li data-i18n="modes.pentest.l3">песочница сносится всегда</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ Конвейер ============ -->
+    <section class="section" id="pipeline">
+      <div class="head">
+        <p class="kicker">03 / <span data-i18n="pipe.kicker">под капотом</span></p>
+        <h2 data-i18n="pipe.title">От архива до PDF — без опроса и без утечек</h2>
+        <p class="sub" data-i18n="pipe.sub">Наведите на узел, чтобы увидеть, что там происходит.</p>
+      </div>
+      <div class="pipe-wrap">
+        <svg class="pipe" viewBox="0 0 1200 380" role="img" aria-label="pipeline">
+          <defs>
+            <linearGradient id="g-wire" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0"><stop offset="0" stop-color="var(--c1)"/><stop offset="1" stop-color="var(--c2)"/></linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g class="wires">
+            <path id="w1" d="M150 190 H260"/>
+            <path id="w2" d="M400 190 H500"/>
+            <path id="w3a" d="M640 190 C690 190 690 80 740 80"/>
+            <path id="w3b" d="M640 190 H740"/>
+            <path id="w3c" d="M640 190 C690 190 690 300 740 300"/>
+            <path id="w4a" d="M860 80 C910 80 910 190 960 190"/>
+            <path id="w4b" d="M860 190 H960"/>
+            <path id="w4c" d="M860 300 C910 300 910 190 960 190"/>
+            <path id="w5" d="M1080 190 H1110"/>
+          </g>
+          <g class="packets">
+            <circle r="5"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#w1"/></animateMotion></circle>
+            <circle r="5"><animateMotion dur="1.6s" begin=".5s" repeatCount="indefinite"><mpath href="#w2"/></animateMotion></circle>
+            <circle r="4" class="p-c"><animateMotion dur="1.9s" begin=".2s" repeatCount="indefinite"><mpath href="#w3a"/></animateMotion></circle>
+            <circle r="4" class="p-c"><animateMotion dur="1.5s" begin=".7s" repeatCount="indefinite"><mpath href="#w3b"/></animateMotion></circle>
+            <circle r="4" class="p-c"><animateMotion dur="1.9s" begin="1s" repeatCount="indefinite"><mpath href="#w3c"/></animateMotion></circle>
+            <circle r="4" class="p-r"><animateMotion dur="1.9s" begin=".4s" repeatCount="indefinite"><mpath href="#w4a"/></animateMotion></circle>
+            <circle r="4" class="p-r"><animateMotion dur="1.5s" begin=".9s" repeatCount="indefinite"><mpath href="#w4b"/></animateMotion></circle>
+            <circle r="4" class="p-r"><animateMotion dur="1.9s" begin="1.3s" repeatCount="indefinite"><mpath href="#w4c"/></animateMotion></circle>
+          </g>
+          <g class="nodes">
+            <g class="node" data-node="dash" transform="translate(20 140)"><rect width="130" height="100" rx="18"/><text x="65" y="44" class="ic">⌂</text><text x="65" y="74" data-i18n="pipe.n.dash">Дашборд</text></g>
+            <g class="node" data-node="srv" transform="translate(260 140)"><rect width="140" height="100" rx="18"/><text x="70" y="44" class="ic">⇅</text><text x="70" y="74" data-i18n="pipe.n.srv">Сервер</text></g>
+            <g class="node" data-node="wrk" transform="translate(500 140)"><rect width="140" height="100" rx="18"/><text x="70" y="44" class="ic">⚙</text><text x="70" y="74" data-i18n="pipe.n.wrk">Воркер</text></g>
+            <g class="node small" data-node="scan" transform="translate(740 40)"><rect width="120" height="80" rx="16"/><text x="60" y="48">gitleaks</text></g>
+            <g class="node small" data-node="scan" transform="translate(740 150)"><rect width="120" height="80" rx="16"/><text x="60" y="48">semgrep…</text></g>
+            <g class="node small" data-node="llm" transform="translate(740 260)"><rect width="120" height="80" rx="16"/><text x="60" y="48">LLM</text></g>
+            <g class="node" data-node="redact" transform="translate(960 140)"><rect width="120" height="100" rx="18"/><text x="60" y="44" class="ic">▒</text><text x="60" y="74">redact</text></g>
+            <g class="node end" data-node="report" transform="translate(1110 150)"><rect width="80" height="80" rx="40"/><text x="40" y="49">PDF</text></g>
+          </g>
+        </svg>
+        <div class="pipe-info" id="pipe-info">
+          <b data-i18n="pipe.d.dash.t">Дашборд</b>
+          <p data-i18n="pipe.d.dash.p">Архив, ссылка на GitHub/GitLab/Bitbucket или путь. Сразу, по расписанию или раз в неделю.</p>
+        </div>
+      </div>
+      <div class="facts">
+        <div><b>LISTEN/NOTIFY</b><span data-i18n="pipe.f1">задача уходит воркеру за ~40 мс, без опроса</span></div>
+        <div><b>claim_id</b><span data-i18n="pipe.f2">аренда задачи — зомби-воркер ничего не перезапишет</span></div>
+        <div><b>redact</b><span data-i18n="pipe.f3">секреты вычищаются до модели и до отчёта</span></div>
+        <div><b>PDF · HTML · MD · JSON</b><span data-i18n="pipe.f4">отчёт с оглавлением на ru/en/uz</span></div>
+      </div>
+    </section>
+
+    <!-- ============ Песочница ============ -->
+    <section class="section" id="sandbox">
+      <div class="head">
+        <p class="kicker">04 / <span data-i18n="sb.kicker">активное тестирование</span></p>
+        <h2 data-i18n="sb.title">Атакуем копию. Никогда — прод.</h2>
+      </div>
+      <div class="sandbox">
+        <div class="stage" aria-hidden="true">
+          <div class="seal"><span data-i18n="sb.seal">SCOPE подписан</span><b id="scope-timer">23:59:59</b></div>
+          <div class="net">
+            <div class="box toolbox"><small>toolbox</small><span>$ nuclei -u http://target</span><span>$ sqlmap --batch</span></div>
+            <div class="lasers"><i></i><i></i><i></i></div>
+            <div class="box target-box"><small>target</small><div class="hp"><i id="hp"></i></div><span class="hits" id="hits">0 findings</span></div>
+            <div class="box db"><small>postgres</small></div>
+          </div>
+          <div class="fence"><span>internal network · no-new-privileges · pids/cpu/mem limits</span></div>
+        </div>
+        <ol class="steps">
+          <li><b data-i18n="sb.s1.t">Scope</b><span data-i18n="sb.s1.p">Цель есть в подписанном scope или добавлена на странице «Scope» со сроком действия. Нет — отчёт не берётся вообще.</span></li>
+          <li><b data-i18n="sb.s2.t">Авторазвёртка</b><span data-i18n="sb.s2.p">Нейросеть пишет Dockerfile, compose — наш. Сборка упала — модель читает ошибку и чинит, до 6 попыток.</span></li>
+          <li><b data-i18n="sb.s3.t">Зависимости</b><span data-i18n="sb.s3.p">Postgres, MySQL, Redis, Mongo рядом с целью: закреплённые образы, случайные пароли, порты наружу не публикуются.</span></li>
+          <li><b data-i18n="sb.s4.t">Атака</b><span data-i18n="sb.s4.p">nuclei и агент: ставит инструменты, запускает, читает вывод, уточняет — каждое действие в audit-log.</span></li>
+          <li><b data-i18n="sb.s5.t">Снос</b><span data-i18n="sb.s5.p">Отмена, ошибка, SIGTERM — песочница и контейнер-инструментарий удаляются всегда.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ Провайдеры ============ -->
+    <section class="section" id="llm">
+      <div class="head">
+        <p class="kicker">05 / <span data-i18n="llm.kicker">любая нейросеть</span></p>
+        <h2 data-i18n="llm.title">Своя модель на сервере или облако — решать вам</h2>
+      </div>
+      <div class="orbit-wrap">
+        <div class="orbit" id="orbit">
+          <div class="core"><span>OX</span></div>
+          <div class="ring r1" data-n="2"></div>
+          <div class="ring r2" data-n="9"></div>
+        </div>
+        <div class="orbit-copy">
+          <div class="switch" role="tablist">
+            <button class="on" data-mode="local" data-i18n="llm.local">Локально</button>
+            <button data-mode="cloud" data-i18n="llm.cloud">Облако</button>
+          </div>
+          <p id="llm-text" data-i18n="llm.localp">Ollama или llama.cpp на вашем железе: код и находки не уходят за периметр. По умолчанию — именно так. Дашборд предупредит, если модель слишком мала для серьёзного ревью.</p>
+          <ul class="ticks">
+            <li data-i18n="llm.t1">ключи шифруются ChaCha20-Poly1305 и выдаются только воркеру</li>
+            <li data-i18n="llm.t2">отдельная модель и лимит объёма для каждого отчёта</li>
+            <li data-i18n="llm.t3">рассуждения Claude, OpenAI и Gemini — из коробки</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Продукт ============ -->
+    <section class="section" id="product">
+      <div class="head">
+        <p class="kicker">06 / <span data-i18n="prod.kicker">продукт</span></p>
+        <h2 data-i18n="prod.title">Дашборд, в котором не стыдно жить</h2>
+        <p class="sub" data-i18n="prod.sub">Переключите тему вверху — скриншоты переключатся тоже.</p>
+      </div>
+      <div class="gallery">
+        <div class="tabs" id="shot-tabs" role="tablist"></div>
+        <div class="devices">
+          <div class="browser">
+            <div class="b-bar"><i></i><i></i><i></i><span class="url">ox-system.local/<b id="shot-path">reports</b></span></div>
+            <div class="b-view">
+              <img id="shot" alt="" width="1600" height="1000" />
+              <div class="progress"><i id="shot-progress"></i></div>
+            </div>
+          </div>
+          <figure class="phone-shot"><img id="phone" alt="" width="560" height="1212" loading="lazy" /><figcaption>390 × 844</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Цифры ============ -->
+    <section class="section numbers">
+      <div class="num"><b data-count="11">0</b><span data-i18n="num.providers">провайдеров LLM</span></div>
+      <div class="num"><b data-count="9">0</b><span data-i18n="num.analyzers">сканеров и анализаторов</span></div>
+      <div class="num"><b data-count="4">0</b><span data-i18n="num.formats">формата отчёта</span></div>
+      <div class="num"><b data-count="3">0</b><span data-i18n="num.langs">языка: отчёт, журнал, UI</span></div>
+      <div class="num"><b data-count="0" data-suffix=" B">0</b><span data-i18n="num.bytes">наружу с локальной моделью</span></div>
+    </section>
+
+    <!-- ============ Принципы ============ -->
+    <section class="section" id="principles">
+      <div class="head">
+        <p class="kicker">07 / <span data-i18n="pr.kicker">паранойя по умолчанию</span></p>
+        <h2 data-i18n="pr.title">Инструмент безопасности, который сам безопасен</h2>
+      </div>
+      <div class="grid">
+        <div class="flip"><div class="f-in"><div class="f-front"><b>fail-closed</b><span data-i18n="pr.1">Неизвестный маршрут — 404, без токена сервер не стартует.</span></div><div class="f-back"><code>POST /reports/%63laim<br>→ 403 Forbidden</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>redact</b><span data-i18n="pr.2">Токены, пароли в URL, *.env — вычищаются до модели.</span></div><div class="f-back"><code>DATABASE_URL=postgres://u:***@db<br>GITHUB_TOKEN=***</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>scope</b><span data-i18n="pr.3">Подписанный scope или цель с истекающим сроком.</span></div><div class="f-back"><code>scope: target not authorized<br>→ pentest skipped</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>audit-log</b><span data-i18n="pr.4">Каждое активное действие — в файл и в БД.</span></div><div class="f-back"><code>{"tool":"pentest.web_scan",<br> "target":"http://target:8000"}</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>brute-force</b><span data-i18n="pr.5">10 неудач за 5 минут — 429, счётчик в Postgres переживает рестарт.</span></div><div class="f-back"><code>HTTP/1.1 429 Too Many Requests<br>Retry-After: 300</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>least privilege</b><span data-i18n="pr.6">Роли user/worker, образы не от root, actions по SHA.</span></div><div class="f-back"><code>USER oxs (10001)<br>permissions: contents: read</code></div></div></div>
+      </div>
+    </section>
+
+    <!-- ============ Развитие проекта ============ -->
+    <section class="section" id="history">
+      <div class="head">
+        <p class="kicker">08 / <span data-i18n="hist.kicker">развитие проекта</span></p>
+        <h2 data-i18n="hist.title">Две недели — от первого коммита до лендинга</h2>
+        <p class="sub" data-i18n="hist.sub">Хроника из журнала разработки. Скриншоты — настоящий дашборд; нажмите, чтобы увеличить.</p>
+      </div>
+      <div class="hist-filter" id="hist-filter" role="group"></div>
+      <div class="timeline" id="timeline">
+        <div class="rail" aria-hidden="true"><i id="rail-fill"></i></div>
+      </div>
+    </section>
+
+    <!-- ============ Запуск ============ -->
+    <section class="section" id="start">
+      <div class="head">
+        <p class="kicker">09 / <span data-i18n="st.kicker">запуск</span></p>
+        <h2 data-i18n="st.title">Три команды до первого отчёта</h2>
+      </div>
+      <div class="install">
+        <div class="switch" role="tablist" id="inst-tabs">
+          <button class="on" data-inst="docker">docker compose</button>
+          <button data-inst="native" data-i18n="st.native">без Docker</button>
+        </div>
+        <div class="code-card">
+          <button class="copy" id="copy" data-i18n="st.copy">Копировать</button>
+          <pre id="inst-docker"><span class="c"># 1. исходники рядом</span>
+mkdir ox-system &amp;&amp; cd ox-system
+for r in analitics_service oxs_mcp oxs_llm dashboard; do
+  git clone https://github.com/OX-Systems/$r.git
+done
+
+<span class="c"># 2. токены</span>
+cd analitics_service/deploy
+echo "API_TOKEN=$(openssl rand -hex 32)"         &gt;  .env
+echo "WORKER_TOKEN=$(openssl rand -hex 32)"      &gt;&gt; .env
+echo "POSTGRES_PASSWORD=$(openssl rand -hex 32)" &gt;&gt; .env
+
+<span class="c"># 3. поехали → http://127.0.0.1:3000</span>
+docker compose up -d --build</pre>
+          <pre id="inst-native" hidden><span class="c"># Debian/Ubuntu · Fedora/RHEL · Alpine · Arch</span>
+git clone https://github.com/OX-Systems/deploy_scripts.git
+cd deploy_scripts
+
+<span class="c"># зависимости, Rust, PostgreSQL, токены, сборка, анализаторы</span>
+./setup.sh
+
+<span class="c"># сервер + воркер + дашборд</span>
+./start.sh start
+./start.sh status</pre>
+        </div>
+        <div class="repos">
+          <a href="https://github.com/OX-Systems/oxs_mcp" target="_blank" rel="noopener"><b>oxs_mcp</b><span data-i18n="st.r.mcp">MCP-инструменты, воркер, песочница</span></a>
+          <a href="https://github.com/OX-Systems/oxs_llm" target="_blank" rel="noopener"><b>oxs_llm</b><span data-i18n="st.r.llm">клиент к 11 провайдерам LLM</span></a>
+          <a href="https://github.com/OX-Systems/analitics_service" target="_blank" rel="noopener"><b>analitics_service</b><span data-i18n="st.r.srv">сервер отчётов: actix-web + Postgres</span></a>
+          <a href="https://github.com/OX-Systems/dashboard" target="_blank" rel="noopener"><b>dashboard</b><span data-i18n="st.r.dash">React 19 + Vite, ru/en/uz</span></a>
+          <a href="https://github.com/OX-Systems/deploy_scripts" target="_blank" rel="noopener"><b>deploy_scripts</b><span data-i18n="st.r.dep">нативная установка одной командой</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Финал ============ -->
+    <section class="finale">
+      <h2><span data-i18n="fin.t1">Найдите уязвимость</span><br><em data-i18n="fin.t2">раньше, чем её найдут.</em></h2>
+      <a class="btn primary big" href="https://github.com/OX-Systems" target="_blank" rel="noopener"><span data-i18n="fin.cta">Открыть на GitHub</span> <i>↗</i></a>
+      <p class="warn" data-i18n="fin.warn">⚠ Активное тестирование — только систем, на которые у вас есть письменное разрешение владельца.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 OX-System</span>
+    <span class="egg" data-i18n="foot.egg">↑ ↑ ↓ ↓ ← → ← → B A</span>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden><button class="lb-close" aria-label="close">×</button><img alt="" /><p></p></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
