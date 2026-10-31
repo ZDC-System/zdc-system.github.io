@@ -510,6 +510,7 @@
       { date: '2026-10-26', shot: 'report-deploy', tags: ['sec', 'mcp', 'mcp'] },
       { date: '2026-10-28', shot: 'settings', tags: ['sec', 'sec', 'llm', 'llm'] },
       { date: '2026-10-30', shot: 'mobile-menu', mobile: true, tags: ['sec', 'ui', 'ui', 'ui', 'ui'] },
+      { date: '2026-10-31', shot: 'demo', tags: ['sec', 'srv', 'ui', 'sec', 'srv'] },
     ];
     const TAGS = ['llm', 'mcp', 'srv', 'ui', 'sec'];
     const tl = $('#timeline');
