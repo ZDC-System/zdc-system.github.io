@@ -312,7 +312,7 @@
         <h2 data-i18n="pr.title">Инструмент безопасности, который сам безопасен</h2>
       </div>
       <div class="grid">
-        <div class="flip"><div class="f-in"><div class="f-front"><b>fail-closed</b><span data-i18n="pr.1">Неизвестный маршрут — 404, без токена сервер не стартует.</span></div><div class="f-back"><code>POST /reports/%63laim<br>→ 403 Forbidden</code></div></div></div>
+        <div class="flip"><div class="f-in"><div class="f-front"><b>fail-closed</b><span data-i18n="pr.1">Неизвестный маршрут — 404, без лицензионного ключа сервер не стартует.</span></div><div class="f-back"><code>POST /reports/%63laim<br>→ 403 Forbidden</code></div></div></div>
         <div class="flip"><div class="f-in"><div class="f-front"><b>redact</b><span data-i18n="pr.2">Токены, пароли в URL, *.env — вычищаются до модели.</span></div><div class="f-back"><code>DATABASE_URL=postgres://u:***@db<br>GITHUB_TOKEN=***</code></div></div></div>
         <div class="flip"><div class="f-in"><div class="f-front"><b>scope</b><span data-i18n="pr.3">Подписанный scope или цель с истекающим сроком.</span></div><div class="f-back"><code>scope: target not authorized<br>→ pentest skipped</code></div></div></div>
         <div class="flip"><div class="f-in"><div class="f-front"><b>audit-log</b><span data-i18n="pr.4">Каждое активное действие — в файл и в БД.</span></div><div class="f-back"><code>{"tool":"pentest.web_scan",<br> "target":"http://target:8000"}</code></div></div></div>
