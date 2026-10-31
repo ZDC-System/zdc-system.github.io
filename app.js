@@ -601,14 +601,13 @@
 
   // ---------------------------------------------------------------- контакт
   function install() {
-    const btn = $('#copy-mail');
-    btn.addEventListener('click', async () => {
+    $$('.copy-mail').forEach((btn) => btn.addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(btn.dataset.mail); toast(t('st.copied')); }
       catch (_) {
-        const r = document.createRange(); r.selectNodeContents($('.contact .mail'));
+        const r = document.createRange(); r.selectNodeContents(btn.previousElementSibling);
         getSelection().removeAllRanges(); getSelection().addRange(r);
       }
-    });
+    }));
   }
 
   // ---------------------------------------------------------------- курсор-прожектор, шапка

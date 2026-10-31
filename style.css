@@ -448,6 +448,60 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 .foot-mail { color: var(--mut); text-decoration: none; }
 .foot-mail:hover { color: var(--c1); }
 
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.foot-mails { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; }
+.links a.nav-new { color: var(--c1); }
+
+/* Объявления: «демо доступен всем», «лицензии скоро» */
+.notices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 24px; }
+.notice { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 20px 24px; border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--c1) 45%, var(--line)); background: color-mix(in srgb, var(--c1) 8%, var(--panel)); color: var(--fg); text-decoration: none; }
+.notice b { font: 700 18px var(--display); letter-spacing: -.02em; }
+.notice b::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px; vertical-align: middle;
+  background: var(--c1); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c1) 25%, transparent); animation: pulse 2s infinite; }
+.notice span { grid-column: 1; color: var(--mut); font-size: 15px; }
+.notice i { grid-row: 1 / span 2; grid-column: 2; font-style: normal; font-size: 22px; color: var(--c1); transition: transform .25s; }
+a.notice:hover i { transform: translateX(4px); }
+.notice.soon { border-color: color-mix(in srgb, var(--med) 45%, var(--line)); background: color-mix(in srgb, var(--med) 7%, var(--panel)); }
+.notice.soon b::before { background: var(--med); box-shadow: 0 0 0 4px color-mix(in srgb, var(--med) 25%, transparent); animation: none; }
+.notice.soon i { color: var(--med); }
+
+/* ============ Страница «Установка» ============ */
+.doc { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 120px clamp(16px, 4vw, 40px) 80px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.doc > *, .guide li, .dl > * { min-width: 0; }
+.doc-head h1 { font-size: clamp(34px, 5vw, 64px); margin-bottom: 18px; }
+.notices.big { margin: 0; }
+.notices.big .notice { grid-template-columns: 1fr; align-content: start; }
+.dl { display: grid; grid-template-columns: 1fr auto; gap: 24px 32px; align-items: center; padding: clamp(22px, 3.5vw, 40px); border-radius: 24px;
+  border: 1px solid var(--line); background: var(--panel); }
+.dl h2, .doc-block h2 { font-size: clamp(24px, 3vw, 36px); margin-bottom: 10px; }
+.dl-status { color: var(--mut); margin: 0 0 14px; }
+.dl-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; font: 14px var(--mono); }
+.dl-meta dt { color: var(--mut); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.dl-meta dd { margin: 2px 0 0; color: var(--fg); }
+.dl-actions { display: grid; gap: 10px; justify-items: stretch; min-width: 240px; }
+.dl-actions .btn { justify-content: center; }
+.req { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; color: var(--mut); }
+.req li::marker { color: var(--c1); }
+.guide { list-style: none; counter-reset: gd; margin: 0; padding: 0; display: grid; gap: 22px; }
+.guide li { counter-increment: gd; position: relative; padding-left: 58px; }
+.guide li::before { content: counter(gd); position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  font: 800 18px var(--display); background: var(--c1); color: var(--on-c1); }
+.guide h3 { font: 700 20px var(--display); letter-spacing: -.02em; margin: 6px 0 6px; }
+.guide p { color: var(--mut); margin: 0 0 12px; font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+.code { position: relative; margin: 0; padding: 16px 18px; padding-right: 110px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg2);
+  overflow-x: auto; font: 14px/1.7 var(--mono); }
+.code code { white-space: pre; color: var(--fg); }
+.code-copy { position: absolute; top: 10px; right: 10px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel2);
+  color: var(--mut); font: 600 12px var(--mono); }
+.code-copy:hover { color: var(--c1); border-color: var(--c1); }
+.cmd-table { display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; align-items: baseline; }
+.cmd-table code { font: 14px var(--mono); color: var(--c1); white-space: nowrap; }
+.cmd-table span { color: var(--mut); }
+.note { color: var(--mut); font-size: 15px; margin: 18px 0 0; padding: 14px 18px; border-left: 3px solid var(--c1); background: var(--panel); border-radius: 0 12px 12px 0; }
+.doc-page .contact { grid-template-columns: 1.1fr 1fr; }
+.doc-page .contact .mail { font-size: clamp(16px, 2vw, 22px); }
+
 /* ============ Финал ============ */
 .finale { position: relative; z-index: 1; text-align: center; padding: clamp(110px, 14vw, 200px) 20px clamp(80px, 10vw, 140px); overflow: hidden; }
 .finale::before { content: ""; position: absolute; left: 50%; top: 55%; width: 900px; height: 900px; translate: -50% -50%; border-radius: 50%;
@@ -514,6 +568,10 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
 }
 
 /* ============ Адаптив ============ */
+@media (max-width: 1340px) {
+  .links { gap: 0; }
+  .links a { padding: 6px 7px; font-size: 14px; }
+}
 @media (max-width: 1100px) {
   .links { display: none; }
   .hero-inner, .sandbox, .orbit-wrap { grid-template-columns: 1fr; }
@@ -524,7 +582,9 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
   .facts { grid-template-columns: 1fr 1fr; }
   .numbers { grid-template-columns: repeat(3, 1fr); }
   .num:nth-child(4) { border-left: 0; }
-  .plan, .contact { grid-template-columns: 1fr; }
+  .plan, .contact, .doc-page .contact { grid-template-columns: 1fr; }
+  .notices, .dl { grid-template-columns: 1fr; }
+  .dl-actions { min-width: 0; }
   .grid { grid-template-columns: 1fr 1fr; }
   .orbit { max-width: 420px; }
 }
@@ -535,6 +595,10 @@ h2 { font: 800 clamp(30px, 4.4vw, 56px)/1.06 var(--display); letter-spacing: -.0
   .prefs { gap: 6px; }
   .grid, .facts, .numbers { grid-template-columns: 1fr; }
   .foot { flex-direction: column; gap: 8px; align-items: center; }
+  .guide li { padding-left: 0; padding-top: 52px; }
+  .cmd-table { grid-template-columns: 1fr; gap: 2px; }
+  .cmd-table span { margin-bottom: 10px; }
+  .code { padding-right: 18px; padding-top: 44px; }
   .num { border-left: 0; border-top: 1px solid var(--line); padding: 20px 4px; }
   .devices { padding-right: 0; }
   .phone-shot { display: none; }

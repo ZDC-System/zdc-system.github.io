@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZDC Systems — установка и запуск</title>
+  <meta name="description" content="Скачать ZDC Systems: готовые бинарники для Linux x86_64, инструкция по установке и запуску, демо-режим." />
+  <meta name="theme-color" content="#050806" />
+  <meta property="og:title" content="ZDC Systems — установка" />
+  <meta property="og:description" content="Готовые бинарники, инструкция по запуску и демо-режим — доступно всем." />
+  <meta property="og:image" content="https://zdc-systems.github.io/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Manrope:wght@400;500;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // Тема до первой отрисовки — без вспышки.
+    try {
+      const t = localStorage.getItem('zdc-landing-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (_) {}
+  </script>
+</head>
+<body class="doc-page">
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top scrolled">
+    <a class="brand" href="index.html" aria-label="ZDC Systems">
+      <svg class="logo" viewBox="0 0 916 252" aria-hidden="true"><path class="logo-w" transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)" d="M1163 2211 c-131 -120 -246 -228 -257 -239 l-18 -21 1068 1 c588 0 1077 3 1086 7 15 5 139 119 406 373 l104 98 -1076 0 -1076 0 -237 -219z M6282 2178 l-262 -252 0 -671 0 -671 263 -252 262 -252 756 3 756 2 242 235 243 235 -857 3 -857 2 -21 15 c-11 8 -83 76 -159 151 l-138 137 0 391 0 391 150 150 150 150 794 5 793 5 54 47 c30 26 142 133 249 238 l195 189 -1176 1 -1175 0 -262 -252z M3335 2019 c-115 -111 -220 -205 -233 -210 -13 -5 -188 -9 -389 -9 l-366 0 -216 -161 c-307 -229 -1267 -958 -1726 -1310 -49 -38 -143 -109 -208 -159 l-119 -90 1105 0 1105 0 46 38 c25 20 153 141 285 267 l239 230 -490 5 -490 5 323 232 c178 128 556 398 839 601 l515 368 3 197 c1 108 -1 197 -5 197 -5 -1 -102 -91 -218 -201z"/><path class="logo-g" transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)" d="M917 2393 c-145 -128 -467 -428 -467 -435 0 -4 44 -8 98 -8 l98 0 256 239 256 239 -30 6 c-17 3 -59 6 -94 6 l-63 0 -54 -47z M3753 2433 l-13 -5 0 -229 0 -229 641 0 640 0 87 -82 c48 -46 131 -127 184 -181 l98 -98 0 -358 0 -358 -177 -176 -178 -177 -95 0 c-52 0 -271 -3 -486 -5 l-392 -5 -11 14 -11 13 -2 624 -3 624 -65 3 c-91 4 -94 3 -250 -113 l-140 -105 0 -760 0 -760 828 0 828 0 302 291 302 291 0 598 0 598 -296 289 c-162 158 -303 291 -312 295 -19 8 -1460 9 -1479 1z M4610 1611 c-172 -53 -227 -247 -104 -367 l42 -41 -45 -182 -46 -183 14 -9 c16 -11 374 -8 384 3 4 4 -13 89 -37 190 l-45 183 33 27 c18 16 42 47 53 71 l21 43 0 50 c-1 141 -142 254 -270 215z M2892 433 c-109 -104 -237 -224 -285 -268 l-87 -80 17 -7 c10 -3 57 -7 105 -7 l88 -1 127 117 c104 95 248 228 448 415 l19 18 -117 0 -118 0 -197 -187z M8531 324 c-138 -130 -251 -241 -251 -245 0 -5 65 -9 145 -9 l145 0 233 216 c127 119 245 230 262 245 l30 29 -157 0 -157 0 -250 -236z"/></svg>
+    </a>
+    <nav class="links">
+      <a href="index.html" data-i18n="in.nav.home">← На главную</a>
+      <a href="#download" data-i18n="in.nav.download">Скачать</a>
+      <a href="#steps" data-i18n="in.nav.steps">Инструкция</a>
+      <a href="#demo" data-i18n="in.nav.demo">Демо-режим</a>
+      <a href="#wsl">WSL</a>
+      <a href="#contact" data-i18n="in.nav.contact">Контакты</a>
+    </nav>
+    <div class="prefs">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="ru">RU</button><button data-lang="en">EN</button><button data-lang="uz">UZ</button>
+      </div>
+      <button class="theme-btn" aria-label="Theme" title="Theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="sun" cx="12" cy="12" r="4.5"/><path class="rays" d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="doc">
+    <section class="doc-head">
+      <p class="kicker" data-i18n="in.kicker">локальная версия</p>
+      <h1 data-i18n="in.title">Установка и запуск</h1>
+      <p class="sub" data-i18n="in.sub">Готовый комплект: бинарники сервера и воркера, собранный дашборд и скрипты. Rust, Node.js и сборка на вашей машине не нужны.</p>
+    </section>
+
+    <!-- Объявления -->
+    <section class="notices big">
+      <div class="notice" id="demo-ann">
+        <b data-i18n="ann.demo.t">Демо-режим теперь доступен всем</b>
+        <span data-i18n="in.ann.demo">Скачайте комплект и запустите у себя — лицензия не нужна: вход по токену, который скрипт создаёт сам. Демо-режим (вход без ключа, проверка одного файла) включается одной строкой — см. шаг 5.</span>
+      </div>
+      <div class="notice soon" id="license">
+        <b data-i18n="ann.lic.t">Лицензионные ключи — скоро</b>
+        <span data-i18n="in.ann.lic">Офлайн-лицензии — ключ проверяется на вашем сервере без выхода в интернет, в нём записаны владелец и срок — скоро будут доступны. Хотите получить ключ одними из первых — напишите нам.</span>
+      </div>
+    </section>
+
+    <!-- Скачивание -->
+    <section class="dl" id="download">
+      <div class="dl-copy">
+        <h2 data-i18n="in.dl.title">Скачать комплект</h2>
+        <p class="dl-status" id="dl-status" data-i18n="in.dl.loading">Узнаём последнюю версию…</p>
+        <dl class="dl-meta" id="dl-meta" hidden>
+          <div><dt data-i18n="in.dl.version">Версия</dt><dd id="m-version"></dd></div>
+          <div><dt data-i18n="in.dl.built">Собрано</dt><dd id="m-built"></dd></div>
+          <div><dt data-i18n="in.dl.arch">Платформа</dt><dd id="m-arch"></dd></div>
+          <div><dt>glibc</dt><dd id="m-glibc"></dd></div>
+        </dl>
+      </div>
+      <div class="dl-actions">
+        <a class="btn primary" id="dl-main" href="https://github.com/ZDC-System/ZDC-bin-release/archive/refs/heads/main.tar.gz"><span data-i18n="in.dl.tgz">Скачать .tar.gz</span> <i>↓</i></a>
+        <a class="btn ghost" id="dl-zip" href="https://github.com/ZDC-System/ZDC-bin-release/archive/refs/heads/main.zip"><span data-i18n="in.dl.zip">Скачать .zip</span></a>
+        <a class="btn ghost" href="https://github.com/ZDC-System/ZDC-bin-release" target="_blank" rel="noopener"><span data-i18n="in.dl.repo">Репозиторий комплекта</span> <i>↗</i></a>
+      </div>
+    </section>
+
+    <!-- Требования -->
+    <section class="doc-block">
+      <h2 data-i18n="in.req.title">Что нужно</h2>
+      <ul class="req">
+        <li data-i18n="in.req.os">Linux x86_64: Debian/Ubuntu, Fedora/RHEL, Alpine или Arch — пакеты setup ставит сам.</li>
+        <li data-i18n="in.req.glibc">glibc не старше той, на которой собран комплект (строка glibc выше). Если сервер пишет «GLIBC_… not found» — напишите нам, соберём под ваш дистрибутив.</li>
+        <li data-i18n="in.req.pg">PostgreSQL 13+ — setup поднимет локальный (нужен sudo) или используйте свой.</li>
+        <li data-i18n="in.req.opt">По желанию: docker + compose (пентест в песочнице), gitleaks, nuclei, Ollama или ключ облачной нейросети.</li>
+      </ul>
+    </section>
+
+    <!-- Шаги -->
+    <section class="doc-block" id="steps">
+      <h2 data-i18n="in.steps.title">Инструкция</h2>
+      <ol class="guide">
+        <li>
+          <h3 data-i18n="in.s1.t">Скачайте и распакуйте</h3>
+          <p data-i18n="in.s1.p">Архивом или через git — содержимое одинаковое.</p>
+          <pre class="code"><code>curl -L -o zdc.tar.gz https://github.com/ZDC-System/ZDC-bin-release/archive/refs/heads/main.tar.gz
+tar xzf zdc.tar.gz &amp;&amp; cd ZDC-bin-release-main
+# или: git clone https://github.com/ZDC-System/ZDC-bin-release.git &amp;&amp; cd ZDC-bin-release</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.s2.t">Проверьте целостность</h3>
+          <p data-i18n="in.s2.p">Каждая строка должна закончиться «OK».</p>
+          <pre class="code"><code>sha256sum -c SHA256SUMS</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.s3.t">Подготовьте машину</h3>
+          <p data-i18n="in.s3.p">Ставит недостающие пакеты, поднимает PostgreSQL (роль zdc, база reports), создаёт scripts/zdc.env с паролем БД и ключом шифрования, ставит анализаторы. Повторный запуск ничего не перетирает.</p>
+          <pre class="code"><code>./zdc.sh setup
+# без анализаторов:      ZDC_SKIP_ANALYZERS=1 ./zdc.sh setup
+# БД на другой машине:   export ZDC_EXTERNAL_DB=1 и DATABASE_URL в scripts/zdc.env</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.s4.t">Запустите и войдите</h3>
+          <p data-i18n="in.s4.p">Скрипт поднимает сервер, дашборд и воркер. Откройте http://127.0.0.1:5173 и активируйте дашборд значением API_TOKEN — скрипт создал его сам. Ключ сохраняется в браузере.</p>
+          <pre class="code"><code>./zdc.sh start
+grep API_TOKEN .zdc-data/tokens.env</code></pre>
+        </li>
+        <li id="demo">
+          <h3 data-i18n="in.s5.t">Демо-режим — по желанию</h3>
+          <p data-i18n="in.s5.p">На экране активации появится кнопка «Демо-режим»: вход без ключа и ревью одного загруженного файла (до 512 КБ), без настроек, scope и чужих отчётов. Демо-посетители видят отчёты друг друга и не ограничены по частоте — на открытом стенде ставьте прокси с лимитом запросов и не храните там рабочие данные.</p>
+          <pre class="code"><code>echo 'export DEMO_MODE=1' &gt;&gt; scripts/zdc.env
+./zdc.sh restart</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.s6.t">Выберите нейросеть</h3>
+          <p data-i18n="in.s6.p">По умолчанию — локальная Ollama: код не покидает сервер. Модель, облачного провайдера и ключи API меняют в дашборде на странице «Нейросеть». Берите модель от 7B — маленькие пропускают уязвимости. Облачный провайдер получает фрагменты кода и находки.</p>
+          <pre class="code"><code>ollama pull gemma3</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Команды -->
+    <section class="doc-block">
+      <h2 data-i18n="in.cmd.title">Команды</h2>
+      <div class="cmd-table">
+        <code>./zdc.sh status</code><span data-i18n="in.cmd.status">состояние компонентов и проверка здоровья</span>
+        <code>./zdc.sh logs server</code><span data-i18n="in.cmd.logs">хвост журнала сервера (или worker)</span>
+        <code>./zdc.sh restart</code><span data-i18n="in.cmd.restart">перезапуск после правки scripts/zdc.env</span>
+        <code>./zdc.sh stop</code><span data-i18n="in.cmd.stop">штатная остановка — воркер сносит песочницу пентеста</span>
+      </div>
+      <p class="note" data-i18n="in.cmd.note">Данные и журналы — в .zdc-data/. Ключ SECRETS_KEY в scripts/zdc.env не теряйте и не меняйте: им зашифрованы ключи нейросетей. Наружу дашборд открывайте только через прокси с TLS (nginx), оставив DASHBOARD_BIND на 127.0.0.1. Подробности — в README комплекта.</p>
+    </section>
+
+    <!-- Windows: WSL -->
+    <section class="doc-block" id="wsl">
+      <h2 data-i18n="in.wsl.title">Установка в Windows (WSL)</h2>
+      <p class="sub" data-i18n="in.wsl.sub">Комплект работает в WSL 2 так же, как на обычном Linux. Дашборд открывается в браузере Windows.</p>
+      <ol class="guide">
+        <li>
+          <h3 data-i18n="in.w1.t">Поставьте WSL с Arch Linux</h3>
+          <p data-i18n="in.w1.p">В PowerShell от имени администратора. Arch — потому что комплект собран под glibc 2.44: в Ubuntu и Debian из WSL glibc старее, и сервер не запустится (нужна отдельная сборка — напишите нам). Нужен WSL 2.4.4 или новее.</p>
+          <pre class="code"><code>wsl --update
+wsl --install -d archlinux
+wsl -d archlinux</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.w2.t">Обновите систему и включите systemd</h3>
+          <p data-i18n="in.w2.p">setup запускает PostgreSQL через systemd. Вторая команда включает его, если он выключен; после неё перезапустите WSL (wsl --shutdown в PowerShell) и войдите снова.</p>
+          <pre class="code"><code>pacman -Syu --noconfirm
+[ "$(ps -p 1 -o comm=)" = systemd ] || printf '[boot]\nsystemd=true\n' &gt;&gt; /etc/wsl.conf</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.w3.t">Установите и запустите в домашнем каталоге</h3>
+          <p data-i18n="in.w3.p">Распаковывайте в файловую систему WSL (~), а не в /mnt/c: на дисках Windows теряются права на запуск и всё работает медленно. Дальше — шаги 1–4 инструкции выше.</p>
+          <pre class="code"><code>cd ~
+curl -L -o zdc.tar.gz https://github.com/ZDC-System/ZDC-bin-release/archive/refs/heads/main.tar.gz
+tar xzf zdc.tar.gz &amp;&amp; cd ZDC-bin-release-main
+sha256sum -c SHA256SUMS &amp;&amp; ./zdc.sh setup &amp;&amp; ./zdc.sh start</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.w4.t">Откройте дашборд в Windows</h3>
+          <p data-i18n="in.w4.p">Откройте http://127.0.0.1:5173 в браузере Windows — WSL пробрасывает localhost сам. Если страница не открывается, включите зеркальную сеть: добавьте в %UserProfile%\.wslconfig строки ниже и выполните wsl --shutdown.</p>
+          <pre class="code"><code>[wsl2]
+networkingMode=mirrored</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.w5.t">Нейросеть и пентест</h3>
+          <p data-i18n="in.w5.p">Ollama ставится прямо в WSL; с зеркальной сетью подойдёт и Ollama для Windows на 127.0.0.1:11434. Для пентеста в песочнице нужен docker: в WSL или Docker Desktop с интеграцией WSL для этого дистрибутива.</p>
+          <pre class="code"><code>pacman -S --noconfirm ollama docker docker-compose
+systemctl enable --now ollama docker
+ollama pull gemma3</code></pre>
+        </li>
+        <li>
+          <h3 data-i18n="in.w6.t">После перезагрузки Windows</h3>
+          <p data-i18n="in.w6.p">WSL не стартует сам — запустите систему одной командой из PowerShell (или добавьте её в автозагрузку через Планировщик заданий). Пока терминал WSL закрыт, Windows может остановить дистрибутив — держите его открытым или проверяйте ./zdc.sh status.</p>
+          <pre class="code"><code>wsl -d archlinux -- bash -lc "~/ZDC-bin-release-main/zdc.sh start"</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+      <div class="contact-copy">
+        <p class="kicker" data-i18n="st.c.kicker">сотрудничество</p>
+        <h3 data-i18n="in.c.title">Вопросы по установке, сборка под ваш дистрибутив, лицензии</h3>
+        <p data-i18n="in.c.p">Пишите — ответим и поможем развернуть:</p>
+      </div>
+      <div class="contact-mail">
+        <div class="mail-row">
+          <a class="mail" href="mailto:misanaproger@gmail.com?subject=ZDC%20Systems">misanaproger@gmail.com</a>
+          <button class="btn ghost small copy-mail" data-mail="misanaproger@gmail.com" data-i18n="st.c.copy">Скопировать адрес</button>
+        </div>
+        <div class="mail-row">
+          <a class="mail" href="mailto:ziron0901@gmail.com?subject=ZDC%20Systems">ziron0901@gmail.com</a>
+          <button class="btn ghost small copy-mail" data-mail="ziron0901@gmail.com" data-i18n="st.c.copy">Скопировать адрес</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 ZDC Systems</span>
+    <span class="foot-mails"><a class="foot-mail" href="mailto:misanaproger@gmail.com">misanaproger@gmail.com</a> <a class="foot-mail" href="mailto:ziron0901@gmail.com">ziron0901@gmail.com</a></span>
+    <a class="foot-mail" href="index.html" data-i18n="in.nav.home">← На главную</a>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="i18n.js"></script>
+  <script src="install.js"></script>
+</body>
+</html>
