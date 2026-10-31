@@ -21,7 +21,7 @@
   «лицензионные ключи — скоро».
 - **Страница «Установка»** (`install.html` + `install.js`) — скачивание комплекта из
   открытого репозитория `ZDC-System/ZDC-bin-release` и инструкция запуска (setup → start →
-  вход по `API_TOKEN`, демо-режим `DEMO_MODE=1`, нейросеть, команды). Ссылки в разметке
+  вход по `API_TOKEN`, демо-режим включён по умолчанию, `DEMO_MODE=0` выключает, нейросеть, команды). Ссылки в разметке
   ведут на архив ветки `main`; скрипт при загрузке спрашивает GitHub API — если появится
   релиз, кнопки переключатся на его архив, — и показывает версию/glibc из `VERSION`.
   Без сети или при лимите API (60 запросов/ч с адреса) остаются ссылки на `main`.
@@ -47,7 +47,7 @@ python3 -m http.server 8000   # http://localhost:8000
 
 Все пути относительные, поэтому страница работает и в корне домена, и в подкаталоге.
 Скриншоты пересобираются: стенд (Postgres + `analitics_service` с `DASHBOARD_DIR`,
-`DEMO_MODE=1` и `API_TOKEN`), `python3 pitch/scripts/seed.py` → JSON с id отчётов,
+`API_TOKEN`; демо включён по умолчанию), `python3 pitch/scripts/seed.py` → JSON с id отчётов,
 `BASE=http://127.0.0.1:<DASHBOARD_BIND> node pitch/scripts/shots.mjs '<json>'` → PNG
 (в т. ч. `*-demo` — форма демо-режима), затем webp: 1600×1000, телефон — 560×1212
 (`assets/shots/{light,dark}-<имя>.webp`).
