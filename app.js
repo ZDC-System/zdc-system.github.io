@@ -408,7 +408,7 @@
   // ---------------------------------------------------------------- орбита провайдеров
   function orbit() {
     const local = ['Ollama', 'llama.cpp'];
-    const cloud = ['Claude', 'OpenAI', 'Gemini', 'DeepSeek', 'Grok', 'OpenRouter', 'Mistral', 'Kimi', 'Z.ai GLM'];
+    const cloud = ['Claude', 'OpenAI', 'Gemini', 'DeepSeek', 'Grok', 'OpenRouter', 'Mistral', 'Kimi', 'Z.ai GLM', 'Qwen'];
     const fill = (ring, names, kind) => {
       ring.innerHTML = names.map((n, i) => {
         const a = (360 / names.length) * i;
@@ -511,6 +511,7 @@
       { date: '2026-10-28', shot: 'settings', tags: ['sec', 'sec', 'llm', 'llm'] },
       { date: '2026-10-30', shot: 'mobile-menu', mobile: true, tags: ['sec', 'ui', 'ui', 'ui', 'ui'] },
       { date: '2026-10-31', shot: 'demo', tags: ['sec', 'srv', 'ui', 'sec', 'srv'] },
+      { date: '2026-11-01', shot: 'settings', tags: ['sec', 'sec', 'sec', 'llm', 'ui'] },
     ];
     const TAGS = ['llm', 'mcp', 'srv', 'ui', 'sec'];
     const tl = $('#timeline');
