@@ -90,8 +90,8 @@
     <section class="doc-block">
       <h2 data-i18n="in.req.title">Что нужно</h2>
       <ul class="req">
-        <li data-i18n="in.req.os">Linux x86_64: Debian/Ubuntu, Fedora/RHEL, Alpine или Arch — пакеты setup ставит сам.</li>
-        <li data-i18n="in.req.glibc">glibc не старше той, на которой собран комплект (строка glibc выше). Если сервер пишет «GLIBC_… not found» — напишите нам, соберём под ваш дистрибутив.</li>
+        <li data-i18n="in.req.os">Linux x86_64: Debian 12+, Ubuntu 22.04+, Fedora или Arch — пакеты setup ставит сам.</li>
+        <li data-i18n="in.req.glibc">glibc 2.35 или новее (строка glibc выше). Не подходят RHEL/Rocky 9, Debian 11, Ubuntu 20.04 и Alpine — если сервер пишет «GLIBC_… not found», напишите нам.</li>
         <li data-i18n="in.req.pg">PostgreSQL 13+ — setup поднимет локальный (нужен sudo) или используйте свой.</li>
         <li data-i18n="in.req.opt">По желанию: docker + compose (пентест в песочнице), gitleaks, nuclei, Ollama или ключ облачной нейросети.</li>
       </ul>
@@ -158,17 +158,16 @@ tar xzf zdc.tar.gz &amp;&amp; cd ZDC-bin-release-main
       <p class="sub" data-i18n="in.wsl.sub">Комплект работает в WSL 2 так же, как на обычном Linux. Дашборд открывается в браузере Windows.</p>
       <ol class="guide">
         <li>
-          <h3 data-i18n="in.w1.t">Поставьте WSL с Arch Linux</h3>
-          <p data-i18n="in.w1.p">В PowerShell от имени администратора. Arch — потому что комплект собран под glibc 2.44: в Ubuntu и Debian из WSL glibc старее, и сервер не запустится (нужна отдельная сборка — напишите нам). Нужен WSL 2.4.4 или новее.</p>
+          <h3 data-i18n="in.w1.t">Поставьте WSL с Ubuntu</h3>
+          <p data-i18n="in.w1.p">В PowerShell от имени администратора. При первом входе Ubuntu попросит придумать имя пользователя и пароль — пароль понадобится для sudo.</p>
           <pre class="code"><code>wsl --update
-wsl --install -d archlinux
-wsl -d archlinux</code></pre>
+wsl --install -d Ubuntu-24.04
+wsl -d Ubuntu-24.04</code></pre>
         </li>
         <li>
-          <h3 data-i18n="in.w2.t">Обновите систему и включите systemd</h3>
-          <p data-i18n="in.w2.p">setup запускает PostgreSQL через systemd. Вторая команда включает его, если он выключен; после неё перезапустите WSL (wsl --shutdown в PowerShell) и войдите снова.</p>
-          <pre class="code"><code>pacman -Syu --noconfirm
-[ "$(ps -p 1 -o comm=)" = systemd ] || printf '[boot]\nsystemd=true\n' &gt;&gt; /etc/wsl.conf</code></pre>
+          <h3 data-i18n="in.w2.t">Обновите систему</h3>
+          <p data-i18n="in.w2.p">systemd в WSL не обязателен: без него setup поднимет PostgreSQL сам.</p>
+          <pre class="code"><code>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre>
         </li>
         <li>
           <h3 data-i18n="in.w3.t">Установите и запустите в домашнем каталоге</h3>
@@ -187,14 +186,14 @@ networkingMode=mirrored</code></pre>
         <li>
           <h3 data-i18n="in.w5.t">Нейросеть и пентест</h3>
           <p data-i18n="in.w5.p">Ollama ставится прямо в WSL; с зеркальной сетью подойдёт и Ollama для Windows на 127.0.0.1:11434. Для пентеста в песочнице нужен docker: в WSL или Docker Desktop с интеграцией WSL для этого дистрибутива.</p>
-          <pre class="code"><code>pacman -S --noconfirm ollama docker docker-compose
-systemctl enable --now ollama docker
+          <pre class="code"><code>curl -fsSL https://ollama.com/install.sh | sh
+sudo apt install -y docker.io docker-compose-v2
 ollama pull gemma3</code></pre>
         </li>
         <li>
           <h3 data-i18n="in.w6.t">После перезагрузки Windows</h3>
           <p data-i18n="in.w6.p">WSL не стартует сам — запустите систему одной командой из PowerShell (или добавьте её в автозагрузку через Планировщик заданий). Пока терминал WSL закрыт, Windows может остановить дистрибутив — держите его открытым или проверяйте ./zdc.sh status.</p>
-          <pre class="code"><code>wsl -d archlinux -- bash -lc "~/ZDC-bin-release-main/zdc.sh start"</code></pre>
+          <pre class="code"><code>wsl -d Ubuntu-24.04 -- bash -lc "~/ZDC-bin-release-main/zdc.sh start"</code></pre>
         </li>
       </ol>
     </section>
