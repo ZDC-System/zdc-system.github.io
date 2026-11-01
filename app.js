@@ -498,6 +498,29 @@
     addEventListener('keydown', (e) => { if (e.key === 'Escape' && !box.hidden) close(); });
   }
 
+  // ---------------------------------------------------------------- анонс облачной версии
+  // Скриншоты настоящего облачного кабинета; переключаются вместе с темой.
+  function cloudShots() {
+    const SHOTS = [['account', 'cloud-account', 'account'], ['buy', 'cloud-buy', 'account/buy'], ['register', 'cloud-register', 'register']];
+    const tabs = $('#cloud-tabs');
+    const img = $('#cloud-img');
+    let idx = 0;
+    function show(i) {
+      idx = i;
+      const [k, file, path] = SHOTS[i];
+      $$('button', tabs).forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i); });
+      $('#cloud-path').textContent = path;
+      img.src = `assets/shots/${root.dataset.theme}-${file}.webp`;
+      img.alt = t('cl.tab.' + k);
+    }
+    tabs.innerHTML = SHOTS.map(([k], i) => `<button role="tab" data-i="${i}" data-i18n="cl.tab.${k}">${t('cl.tab.' + k)}</button>`).join('');
+    $$('button', tabs).forEach((b) => b.addEventListener('click', () => show(+b.dataset.i)));
+    img.addEventListener('click', () => lightbox(img.src, img.alt));
+    themeListeners.push(() => show(idx));
+    langListeners.push(() => show(idx));
+    show(0);
+  }
+
   // ---------------------------------------------------------------- развитие проекта
   // Даты, теги и скриншоты — общие; тексты событий — в i18n.js (`hist`, по индексу).
   function history() {
@@ -511,7 +534,7 @@
       { date: '2026-10-28', shot: 'settings', tags: ['sec', 'sec', 'llm', 'llm'] },
       { date: '2026-10-30', shot: 'mobile-menu', mobile: true, tags: ['sec', 'ui', 'ui', 'ui', 'ui'] },
       { date: '2026-10-31', shot: 'demo', tags: ['sec', 'srv', 'ui', 'sec', 'srv'] },
-      { date: '2026-11-01', shot: 'settings', tags: ['sec', 'sec', 'sec', 'llm', 'ui'] },
+      { date: '2026-11-01', shot: 'cloud-account', tags: ['sec', 'sec', 'sec', 'llm', 'ui', 'srv', 'ui'] },
     ];
     const TAGS = ['llm', 'mcp', 'srv', 'ui', 'sec'];
     const tl = $('#timeline');
@@ -656,6 +679,7 @@
   reveal();
   install();
   lightboxInit();
+  cloudShots();
   history();
   chrome();
   konami();

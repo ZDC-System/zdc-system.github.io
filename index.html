@@ -40,6 +40,7 @@
       <a href="#sandbox" data-i18n="nav.pentest">Пентест</a>
       <a href="#product" data-i18n="nav.product">Продукт</a>
       <a href="#history" data-i18n="nav.history">Развитие</a>
+      <a href="#cloud" class="nav-soon" data-i18n="nav.cloud">Облако</a>
       <a href="#start" data-i18n="nav.start">Сотрудничество</a>
       <a href="install.html" class="nav-new" data-i18n="nav.install">Установка</a>
     </nav>
@@ -63,6 +64,7 @@
       <canvas id="codefield" aria-hidden="true"></canvas>
       <div class="hero-inner">
         <div class="hero-copy">
+          <a class="hero-ann" href="#cloud"><b data-i18n="ann.cloud.badge">скоро</b><span data-i18n="ann.cloud.bar">ZDC Cloud: вход через Google или GitHub и покупка лицензии в личном кабинете</span><i>→</i></a>
           <p class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">security-ревью ИИ-агентами · локальная версия · Rust</span></p>
           <h1>
             <span class="line" data-scramble data-i18n="hero.t1">Нейросеть читает</span>
@@ -334,12 +336,41 @@
       </div>
     </section>
 
+    <!-- ============ Анонс: облачная версия ============ -->
+    <section class="section" id="cloud">
+      <div class="head">
+        <p class="kicker">09 / <span data-i18n="cl.kicker">анонс</span></p>
+        <h2><span data-i18n="cl.title">ZDC Cloud — без установки</span> <span class="soon-tag" data-i18n="ann.cloud.badge">скоро</span></h2>
+        <p class="sub" data-i18n="cl.sub">Облачная версия: зарегистрировались — и проверяете репозиторий прямо в браузере. А лицензия для своего сервера покупается там же, в личном кабинете.</p>
+      </div>
+      <div class="cloud">
+        <ul class="cloud-feats">
+          <li><b data-i18n="cl.f1.t">Вход за минуту</b><span data-i18n="cl.f1.p">Почта и пароль или «Продолжить с Google / GitHub» — без лишних форм.</span></li>
+          <li><b data-i18n="cl.f2.t">Личный аккаунт или организация</b><span data-i18n="cl.f2.p">Для себя — своё пространство. Для команды — общие проверки и роли владельца и администратора.</span></li>
+          <li><b data-i18n="cl.f3.t">Лицензия — в личном кабинете</b><span data-i18n="cl.f3.p">Выбрали тариф — оплатили — скачали файл .lic и подключили одной командой. Срок и число воркеров видны там же.</span></li>
+          <li><b data-i18n="cl.f4.t">Отчёты — в PDF, HTML и Markdown</b><span data-i18n="cl.f4.p">Тот же отчёт с находками и исправлениями, что и в локальной версии.</span></li>
+        </ul>
+        <div class="cloud-shot">
+          <div class="tabs" id="cloud-tabs" role="tablist"></div>
+          <div class="browser">
+            <div class="b-bar"><i></i><i></i><i></i><span class="url">cloud.zdc/<b id="cloud-path">account</b></span></div>
+            <div class="b-view"><img id="cloud-img" alt="" width="1600" height="1000" loading="lazy" /></div>
+          </div>
+        </div>
+      </div>
+      <p class="cloud-note" data-i18n="cl.note">Код в облачной версии проверяется на наших серверах. Если код не должен покидать периметр — выбирайте локальную версию: она остаётся основной.</p>
+      <div class="cloud-cta">
+        <a class="btn primary" href="mailto:misanaproger@gmail.com,ziron0901@gmail.com?subject=ZDC%20Cloud%20—%20ранний%20доступ"><span data-i18n="cl.cta">Хочу ранний доступ</span> <i>→</i></a>
+        <span class="muted-s" data-i18n="cl.cta.p">Напишите — позовём в числе первых, когда откроем регистрацию.</span>
+      </div>
+    </section>
+
     <!-- ============ Локальная версия и сотрудничество ============ -->
     <section class="section" id="start">
       <div class="head">
-        <p class="kicker">09 / <span data-i18n="st.kicker">локальная версия</span></p>
+        <p class="kicker">10 / <span data-i18n="st.kicker">локальная версия</span></p>
         <h2 data-i18n="st.title">Работает у вас, а не у нас</h2>
-        <p class="sub" data-i18n="st.sub">Сейчас ZDC Systems — только локальная версия: ставится на ваш сервер, код и отчёты не покидают периметр. Облачной версии пока нет.</p>
+        <p class="sub" data-i18n="st.sub">Сейчас ZDC Systems — только локальная версия: ставится на ваш сервер, код и отчёты не покидают периметр. Облачная версия — в разработке, см. анонс выше.</p>
       </div>
       <div class="notices">
         <a class="notice" href="install.html#demo"><b data-i18n="ann.demo.t">Демо-режим теперь доступен всем</b><span data-i18n="ann.demo.p">Скачайте комплект и запустите у себя — без лицензии он работает в демо-режиме.</span><i>→</i></a>
