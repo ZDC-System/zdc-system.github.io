@@ -22,15 +22,56 @@
       const t = localStorage.getItem('zdc-landing-theme');
       if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
     } catch (_) {}
+    // Стартовая страница — когда в адресе нет якоря раздела.
+    if (!location.hash || location.hash === '#intro') document.documentElement.classList.add('on-intro');
   </script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
   <div class="spot" aria-hidden="true"></div>
 
+  <!-- ============ Стартовая страница (открывается первой и по клику на логотип) ============ -->
+  <section class="intro" id="intro" aria-label="ZDC Systems">
+    <canvas class="codefield" id="intro-field" aria-hidden="true"></canvas>
+    <div class="intro-glow" aria-hidden="true"></div>
+    <div class="intro-inner">
+      <div class="intro-copy">
+        <p class="intro-badge"><span class="dot"></span><span data-i18n="intro.badge">Платформа для проверки и анализа безопасности</span></p>
+        <h1>
+          <span class="line" data-scramble data-i18n="intro.t1">Нейросеть</span>
+          <span class="line" data-scramble data-i18n="intro.t2">читает ваш код</span>
+          <span class="line accent" data-scramble data-i18n="intro.t3">как атакующий.</span>
+        </h1>
+        <p class="lead" data-i18n="intro.lead">ZDC Systems проводит ревью кода, выявляет уязвимости и помогает сделать ваш продукт безопаснее.</p>
+        <div class="intro-cta">
+          <a class="btn primary" href="install.html"><span data-i18n="intro.demo">Попробовать демо</span> <i>→</i></a>
+          <a class="btn outline" href="#top"><span data-i18n="intro.more">Узнать больше</span> <i>→</i></a>
+        </div>
+      </div>
+      <div class="term" aria-label="report_worker">
+        <div class="term-bar"><i></i><i></i><i></i><span>report_worker — 8736b6d0</span></div>
+        <pre id="intro-term" class="term-log"></pre>
+      </div>
+    </div>
+    <ul class="intro-feats">
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+        <div><b data-i18n="intro.f1.t">Выявление уязвимостей</b><span data-i18n="intro.f1.s">Найдите слабые места до злоумышленников</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-6M10 20V10M15 20V6M20 20V3"/></svg>
+        <div><b data-i18n="intro.f2.t">Детальные отчёты</b><span data-i18n="intro.f2.s">Понятные отчёты с рекомендациями</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3a2 2 0 1 0 4 0V3h2v6h-3a2 2 0 1 0 0 4h3v8h-6v-3a2 2 0 1 0-4 0v3H3v-8h3a2 2 0 1 0 0-4H3V3z"/></svg>
+        <div><b data-i18n="intro.f3.t">Гибкая интеграция</b><span data-i18n="intro.f3.s">Подключите ZDC к вашему workflow</span></div>
+      </li>
+    </ul>
+  </section>
+
   <!-- ============ Шапка ============ -->
   <header class="top">
-    <a class="brand" href="#top" aria-label="ZDC Systems">
+    <a class="brand" href="#intro" aria-label="ZDC Systems">
       <svg class="logo" viewBox="0 0 916 252" aria-hidden="true"><path class="logo-w" transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)" d="M1163 2211 c-131 -120 -246 -228 -257 -239 l-18 -21 1068 1 c588 0 1077 3 1086 7 15 5 139 119 406 373 l104 98 -1076 0 -1076 0 -237 -219z M6282 2178 l-262 -252 0 -671 0 -671 263 -252 262 -252 756 3 756 2 242 235 243 235 -857 3 -857 2 -21 15 c-11 8 -83 76 -159 151 l-138 137 0 391 0 391 150 150 150 150 794 5 793 5 54 47 c30 26 142 133 249 238 l195 189 -1176 1 -1175 0 -262 -252z M3335 2019 c-115 -111 -220 -205 -233 -210 -13 -5 -188 -9 -389 -9 l-366 0 -216 -161 c-307 -229 -1267 -958 -1726 -1310 -49 -38 -143 -109 -208 -159 l-119 -90 1105 0 1105 0 46 38 c25 20 153 141 285 267 l239 230 -490 5 -490 5 323 232 c178 128 556 398 839 601 l515 368 3 197 c1 108 -1 197 -5 197 -5 -1 -102 -91 -218 -201z"/><path class="logo-g" transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)" d="M917 2393 c-145 -128 -467 -428 -467 -435 0 -4 44 -8 98 -8 l98 0 256 239 256 239 -30 6 c-17 3 -59 6 -94 6 l-63 0 -54 -47z M3753 2433 l-13 -5 0 -229 0 -229 641 0 640 0 87 -82 c48 -46 131 -127 184 -181 l98 -98 0 -358 0 -358 -177 -176 -178 -177 -95 0 c-52 0 -271 -3 -486 -5 l-392 -5 -11 14 -11 13 -2 624 -3 624 -65 3 c-91 4 -94 3 -250 -113 l-140 -105 0 -760 0 -760 828 0 828 0 302 291 302 291 0 598 0 598 -296 289 c-162 158 -303 291 -312 295 -19 8 -1460 9 -1479 1z M4610 1611 c-172 -53 -227 -247 -104 -367 l42 -41 -45 -182 -46 -183 14 -9 c16 -11 374 -8 384 3 4 4 -13 89 -37 190 l-45 183 33 27 c18 16 42 47 53 71 l21 43 0 50 c-1 141 -142 254 -270 215z M2892 433 c-109 -104 -237 -224 -285 -268 l-87 -80 17 -7 c10 -3 57 -7 105 -7 l88 -1 127 117 c104 95 248 228 448 415 l19 18 -117 0 -118 0 -197 -187z M8531 324 c-138 -130 -251 -241 -251 -245 0 -5 65 -9 145 -9 l145 0 233 216 c127 119 245 230 262 245 l30 29 -157 0 -157 0 -250 -236z"/></svg>
     </a>
     <nav class="links">
@@ -59,34 +100,6 @@
   </header>
 
   <main id="top">
-    <!-- ============ Hero ============ -->
-    <section class="hero">
-      <canvas id="codefield" aria-hidden="true"></canvas>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <a class="hero-ann" href="#cloud"><b data-i18n="ann.cloud.badge">скоро</b><span data-i18n="ann.cloud.bar">ZDC Cloud: вход через Google или GitHub и покупка лицензии в личном кабинете</span><i>→</i></a>
-          <p class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">security-ревью ИИ-агентами · локальная версия · Rust</span></p>
-          <h1>
-            <span class="line" data-scramble data-i18n="hero.t1">Нейросеть читает</span>
-            <span class="line" data-scramble data-i18n="hero.t2">ваш код</span>
-            <span class="line accent" data-scramble data-i18n="hero.t3">как атакующий.</span>
-          </h1>
-          <p class="lead" data-i18n="hero.lead">ZDC Systems проводит ревью кода, ревью развёртки и пентест в изолированной песочнице — и выдаёт отчёт с доказательствами и исправлениями раньше, чем уязвимость найдёт кто-то другой.</p>
-          <ul class="chips">
-            <li data-i18n="hero.c1">данные не покидают сервер с локальной моделью</li>
-            <li data-i18n="hero.c2">12 провайдеров LLM</li>
-            <li>RU · EN · UZ</li>
-          </ul>
-        </div>
-
-        <div class="term" aria-label="report_worker">
-          <div class="term-bar"><i></i><i></i><i></i><span>report_worker — 87e3dc8d</span></div>
-          <pre id="term"></pre>
-        </div>
-      </div>
-      <a class="scroll-hint" href="#ticker" aria-label="scroll"><span></span></a>
-    </section>
-
     <!-- ============ Бегущая строка находок ============ -->
     <div class="ticker" id="ticker" aria-hidden="true">
       <div class="track" id="ticker-track"></div>

@@ -77,8 +77,7 @@
   langListeners.push(scrambleHero);
 
   // ---------------------------------------------------------------- поле кода в hero
-  function codeField() {
-    const cv = $('#codefield');
+  function codeField(cv) {
     const ctx = cv.getContext('2d');
     const CODE = [
       'fn claim(conn: &mut PgConnection) -> Result<Report> {', '  let row = reports.filter(status.eq("pending"))',
@@ -119,6 +118,9 @@
     let t0 = performance.now();
     function frame(now) {
       const dt = Math.min(64, now - t0); t0 = now;
+      // Скрытый холст (другая страница) не рисуем; показали — пересчитать размер.
+      if (!cv.clientWidth) { requestAnimationFrame(frame); return; }
+      if (cv.clientWidth !== W || cv.clientHeight !== H) resize();
       const css = getComputedStyle(root);
       const fg = css.getPropertyValue('--code-dim').trim();
       // Найденные «уязвимые» строки подсвечиваются зелёным, как в матрице.
@@ -169,8 +171,7 @@
   }
 
   // ---------------------------------------------------------------- терминал воркера
-  async function terminal() {
-    const pre = $('#term');
+  async function terminal(pre) {
     let run = 0;
     langListeners.push(() => { run++; loop(run); });
     async function loop(id) {
@@ -192,6 +193,8 @@
           pre.scrollTop = pre.scrollHeight;
           i++;
           await sleep(lvl === 'ok' ? 300 : 260 + Math.random() * 380);
+          // На скрытой странице не печатаем — ждём, пока её покажут.
+          while (id === run && !pre.clientWidth) await sleep(400);
         }
         const cur = document.createElement('div');
         cur.className = 'tl cursor'; cur.innerHTML = '<span class="ts">        </span> <span class="blink">▍</span>';
@@ -649,6 +652,34 @@
     onScroll();
   }
 
+  // ---------------------------------------------------------------- стартовая страница
+  // Без якоря (или #intro) открыта стартовая; любой якорь раздела — прежний лендинг.
+  function views() {
+    const isIntro = () => !location.hash || location.hash === '#intro';
+    function show() {
+      const intro = isIntro();
+      const was = root.classList.contains('on-intro');
+      root.classList.toggle('on-intro', intro);
+      if (intro) { if (!was) { scrollTo(0, 0); scrambleHero(); } return; }
+      // Лендинг был скрыт — браузер не прокрутил к якорю сам.
+      const el = document.getElementById(location.hash.slice(1));
+      if (was) {
+        if (el && location.hash !== '#top') requestAnimationFrame(() => el.scrollIntoView({ behavior: 'instant', block: 'start' }));
+        else scrollTo(0, 0);
+      }
+    }
+    addEventListener('hashchange', show);
+    show();
+    // Прямая ссылка на раздел: картинки выше грузятся позже и сдвигают разметку —
+    // докрутить ещё раз, пока пользователь сам не прокрутил.
+    if (!isIntro()) {
+      let touched = false;
+      ['wheel', 'touchstart', 'keydown'].forEach((e) => addEventListener(e, () => { touched = true; }, { once: true, passive: true }));
+      const fix = () => { const el = document.getElementById(location.hash.slice(1)); if (el && !touched) el.scrollIntoView({ behavior: 'instant', block: 'start' }); };
+      addEventListener('load', () => { fix(); setTimeout(fix, 400); setTimeout(fix, 1200); });
+    }
+  }
+
   // ---------------------------------------------------------------- пасхалка: код Konami
   function konami() {
     const seq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -667,8 +698,9 @@
 
   // ---------------------------------------------------------------- старт
   applyLang(lang);
-  codeField();
-  terminal();
+  codeField($('#intro-field'));
+  terminal($('#intro-term'));
+  views();
   ticker();
   scanner();
   tilt();
