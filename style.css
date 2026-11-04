@@ -709,3 +709,134 @@ a.notice:hover i { transform: translateX(4px); }
 main > .ticker:first-child { margin-top: 84px; }
 @media (max-width: 640px) { main > .ticker:first-child { margin-top: 68px; } }
 main > .ticker:first-child + .section { padding-top: clamp(36px, 4vw, 56px); }
+
+/* ============================================================
+   Фирменный стиль ZDC: как в дашборде и логотипе — угловатые формы со
+   скошенными углами (срезаны левый верхний и правый нижний, как --chamfer
+   у кнопок дашборда), штрихи логотипа, палитра и шрифты дашборда (Inter +
+   JetBrains Mono). Слой идёт последним и перекрывает скругления выше.
+   ============================================================ */
+:root {
+  /* Палитра тёмной темы dashboard/src/index.css */
+  --bg: #070a08;
+  --bg2: #0e1310;
+  --panel: rgba(255, 255, 255, .03);
+  --panel2: #151c17;
+  --line: #223027;
+  --c2: #4cc38a;
+  --crit: #f2555a;
+  --high: #f5884f;
+  --med: #e9b93a;
+  --low: #6aa0f0;
+  --glass: rgba(7, 10, 8, .78);
+  --r: 0px;
+  --display: "Inter", system-ui, sans-serif;
+  /* Срезы углов: крупные панели, кнопки, мелкие метки */
+  --cut-l: 14px;
+  --cut-m: 10px;
+  --cut-s: 6px;
+  --ch-l: polygon(var(--cut-l) 0, 100% 0, 100% calc(100% - var(--cut-l)), calc(100% - var(--cut-l)) 100%, 0 100%, 0 var(--cut-l));
+  --ch-m: polygon(var(--cut-m) 0, 100% 0, 100% calc(100% - var(--cut-m)), calc(100% - var(--cut-m)) 100%, 0 100%, 0 var(--cut-m));
+  --ch-s: polygon(var(--cut-s) 0, 100% 0, 100% calc(100% - var(--cut-s)), calc(100% - var(--cut-s)) 100%, 0 100%, 0 var(--cut-s));
+  /* Два наклонных штриха логотипа */
+  --slashes: linear-gradient(var(--c1), var(--c1)) 0 0 / 5px 100% no-repeat, linear-gradient(var(--c1), var(--c1)) 9px 0 / 5px 100% no-repeat;
+}
+:root[data-theme='light'] {
+  --bg2: #ffffff;
+  --panel: rgba(255, 255, 255, .8);
+  --panel2: #edf2ee;
+  --line: #dbe3dd;
+  --fg: #111713;
+  --mut: #5b6760;
+  --c2: #1d7f4e;
+  --crit: #b42318;
+  --high: #e2622b;
+  --med: #d79b00;
+  --low: #3f7fd9;
+  --glass: rgba(243, 246, 244, .85);
+}
+body { font-family: "Inter", system-ui, sans-serif; }
+.node text { font-family: "Inter", sans-serif; }
+h1 { font-weight: 800; letter-spacing: -.04em; }
+h2 { font-weight: 800; letter-spacing: -.03em; }
+
+/* Крупные панели — срез 14px */
+.term, .editor, .findings, .card, .pipe-wrap, .stage, .browser, .f-front, .f-back, .plan li, .contact,
+.notice, .dl, .ev-card, .ev-shot, .cloud-feats li, .intro-feats li, .lightbox img {
+  border-radius: 0; clip-path: var(--ch-l);
+}
+/* Кнопки, плашки, вложенные блоки — 10px */
+.btn, .btn.big, .intro-cta .btn, .fd, .card-art, .facts div, .seal, .box, .steps li, .code, .toast,
+.art-pentest .cage, .guide li::before, .ev-shot.mobile, .phone-shot img {
+  border-radius: 0; clip-path: var(--ch-m);
+}
+/* Мелкие метки, чипы, переключатели — 6px */
+.btn.small, .links a, .lang, .lang button, .gh, .eyebrow, .sources span, .card .tag, .url, .code-copy,
+.switch, .switch button, .tabs button, .hist-filter button, .pchip, .hero-ann, .hero-ann b, .soon-tag,
+.intro-badge, .ev-card li i, .ev-shot span, .theme-btn, .lb-close, .art-deploy i, .art-pentest .target,
+.redacted, .fence span {
+  border-radius: 0; clip-path: var(--ch-s);
+}
+/* Без среза, но и без скруглений: полосы, рамки с выносками наружу */
+.bar, .hp, .rail, .rail i, .lasers i, .art-code span, .art-pentest .shot, .fence, .note, .cloud-note,
+.scroll-hint span { border-radius: 0; }
+.scroll-hint { border-radius: 0; clip-path: var(--ch-s); }
+/* Тени снаружи срезанной формы не видны — свечение рисуем внутренним контуром */
+.btn.primary { box-shadow: none; }
+.term { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c1) 22%, transparent); }
+:root:not([data-theme='light']) .btn.primary:hover { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--c1) 45%, transparent)); }
+.contact, .notice, .dl { box-shadow: none; }
+
+/* Штрихи логотипа вместо «светофора» в окнах и точки в плашках */
+.term-bar i, .b-bar i { width: 5px; height: 13px; border-radius: 0; background: var(--c1); transform: skewX(-25deg); opacity: .85; }
+.term-bar i:nth-child(2), .term-bar i:nth-child(3), .b-bar i:nth-child(2), .b-bar i:nth-child(3) { background: var(--c1); }
+.b-bar i:nth-child(n+2) { margin-left: -2px; }
+.intro-badge .dot { width: 14px; height: 13px; border-radius: 0; background: var(--slashes); box-shadow: none; transform: skewX(-25deg); }
+.pulse { border-radius: 0; width: 7px; height: 11px; transform: skewX(-25deg); background: var(--c1); animation: none; box-shadow: none; }
+.kicker { display: flex; align-items: center; gap: 12px; }
+.kicker::before { content: ""; flex: none; width: 14px; height: 12px; background: var(--slashes); transform: skewX(-25deg); }
+
+/* Центр орбиты нейросетей — восьмиугольник, точки ленты — ромбы */
+.core { border-radius: 0; clip-path: polygon(29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%); }
+.ev-dot { border-radius: 0; transform: rotate(45deg); }
+
+/* Крупные штрихи логотипа на фоне справа */
+body::after {
+  content: ""; position: fixed; z-index: 0; pointer-events: none; right: -6vw; top: 0; bottom: 0; width: 34vw;
+  background:
+    linear-gradient(var(--c1), var(--c1)) 0 0 / 22% 100% no-repeat,
+    linear-gradient(var(--c1), var(--c1)) 48% 0 / 13% 100% no-repeat;
+  transform: skewX(-25deg); opacity: .035;
+}
+:root[data-theme='light'] body::after { opacity: .05; }
+@media (max-width: 700px) { body::after { width: 60vw; right: -20vw; } }
+/* Узлы схемы конвейера (SVG) */
+.node rect { rx: 0; ry: 0; clip-path: var(--ch-m); }
+/* Диагональ рамки на срезанных углах: clip-path срезает и рамку, поэтому её
+   дорисовывает фоновый градиент ровно по линии среза (в координатах padding-box). */
+.term, .editor, .findings, .card, .pipe-wrap, .browser, .plan li, .ev-card, .cloud-feats li, .intro-feats li {
+  --edge-k: var(--cut-l);
+}
+.btn.ghost, .btn.outline, .facts div, .box, .code, .seal, .steps li {
+  --edge-k: var(--cut-m);
+}
+.eyebrow, .intro-badge, .lang, .switch, .tabs button, .hist-filter button, .sources span, .code-copy, .pchip, .theme-btn {
+  --edge-k: var(--cut-s);
+}
+.term, .editor, .findings, .card, .pipe-wrap, .browser, .plan li, .ev-card, .cloud-feats li, .intro-feats li,
+.btn.ghost, .btn.outline, .facts div, .box, .code, .seal, .steps li,
+.eyebrow, .intro-badge, .lang, .switch, .tabs button, .hist-filter button, .sources span, .code-copy, .pchip, .theme-btn {
+  --edge-w: 1px;
+  --edge-d: calc((var(--edge-k) - 2 * var(--edge-w)) * .7071);
+  background-image:
+    linear-gradient(135deg, transparent calc(var(--edge-d) - var(--edge-w)), var(--edge-c, var(--line)) 0 calc(var(--edge-d) + .4px), transparent 0),
+    linear-gradient(315deg, transparent calc(var(--edge-d) - var(--edge-w)), var(--edge-c, var(--line)) 0 calc(var(--edge-d) + .4px), transparent 0);
+}
+.intro-feats li { --edge-c: color-mix(in srgb, var(--c1) 30%, var(--line)); }
+.intro-feats li:hover { --edge-c: var(--c1); }
+.intro .term { --edge-c: color-mix(in srgb, var(--c1) 55%, var(--line)); }
+.intro-badge { --edge-c: color-mix(in srgb, var(--c1) 35%, var(--line)); }
+.btn.outline { --edge-c: var(--c1); --edge-w: 1.5px; }
+.btn.ghost:hover { --edge-c: var(--c1); }
+.card:hover { --edge-c: color-mix(in srgb, var(--accent) 50%, transparent); }
+.seal { --edge-c: color-mix(in srgb, var(--c2) 50%, transparent); }
