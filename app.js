@@ -538,6 +538,10 @@
       { date: '2026-10-30', shot: 'mobile-menu', mobile: true, tags: ['sec', 'ui', 'ui', 'ui', 'ui'] },
       { date: '2026-10-31', shot: 'demo', tags: ['sec', 'srv', 'ui', 'sec', 'srv'] },
       { date: '2026-11-01', shot: 'cloud-account', tags: ['sec', 'sec', 'sec', 'llm', 'ui', 'srv', 'ui'] },
+      { date: '2026-11-02', shot: 'mobile-reports', mobile: true, tags: ['srv', 'sec', 'llm', 'srv', 'ui'] },
+      { date: '2026-11-03', shot: 'cloud-register', tags: ['ui', 'sec', 'mcp', 'sec'] },
+      { date: '2026-11-06', shot: 'cloud-buy', tags: ['srv', 'sec', 'srv', 'ui'] },
+      { date: '2026-11-07', shot: 'reports', tags: ['mcp', 'sec', 'mcp', 'ui', 'sec'] },
     ];
     const TAGS = ['llm', 'mcp', 'srv', 'ui', 'sec'];
     const tl = $('#timeline');
