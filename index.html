@@ -110,7 +110,7 @@
       <div class="head">
         <p class="kicker">01 / <span data-i18n="scan.kicker">попробуйте</span></p>
         <h2 data-i18n="scan.title">Найдите пять уязвимостей за пять секунд</h2>
-        <p class="sub" data-i18n="scan.sub">Небольшое Flask-приложение. Нажмите «Сканировать» — gitleaks, semgrep, правила развёртки и нейросеть пройдут по коду, а секрет будет вычищен до того, как строка уйдёт модели.</p>
+        <p class="sub" data-i18n="scan.sub">Небольшое Flask-приложение. Нажмите «Сканировать» — gitleaks, opengrep, правила развёртки и нейросеть пройдут по коду, а секрет будет вычищен до того, как строка уйдёт модели.</p>
       </div>
 
       <div class="lab">
@@ -134,7 +134,7 @@
             <li class="placeholder" data-i18n="scan.idle">Пока тихо. Подозрительно тихо…</li>
           </ul>
           <div class="sources">
-            <span>gitleaks</span><span>semgrep</span><span>deploy_rules</span><span>llm_review</span><span>redact</span>
+            <span>gitleaks</span><span>opengrep</span><span>deploy_rules</span><span>llm_review</span><span>redact</span>
           </div>
         </aside>
       </div>
@@ -153,7 +153,7 @@
           </div>
           <code class="tag">code_review</code>
           <h3 data-i18n="modes.code.t">Ревью кода</h3>
-          <p data-i18n="modes.code.p">Нейросеть сама выбирает файлы, читает проект частями с картой всех файлов — и не путает «нет аутентификации» с middleware в соседнем модуле. Плюс gitleaks, semgrep, cargo-audit.</p>
+          <p data-i18n="modes.code.p">Нейросеть сама выбирает файлы, читает проект частями с картой всех файлов — и не путает «нет аутентификации» с middleware в соседнем модуле. Плюс gitleaks, opengrep, cargo-audit.</p>
           <ul><li>SQLi · RCE · IDOR</li><li data-i18n="modes.code.l2">секреты в истории</li><li data-i18n="modes.code.l3">уязвимые зависимости</li></ul>
         </article>
         <article class="card tilt" style="--hue: 160">
@@ -216,7 +216,7 @@
             <g class="node" data-node="srv" transform="translate(260 140)"><rect width="140" height="100" rx="18"/><text x="70" y="44" class="ic">⇅</text><text x="70" y="74" data-i18n="pipe.n.srv">Сервер</text></g>
             <g class="node" data-node="wrk" transform="translate(500 140)"><rect width="140" height="100" rx="18"/><text x="70" y="44" class="ic">⚙</text><text x="70" y="74" data-i18n="pipe.n.wrk">Воркер</text></g>
             <g class="node small" data-node="scan" transform="translate(740 40)"><rect width="120" height="80" rx="16"/><text x="60" y="48">gitleaks</text></g>
-            <g class="node small" data-node="scan" transform="translate(740 150)"><rect width="120" height="80" rx="16"/><text x="60" y="48">semgrep…</text></g>
+            <g class="node small" data-node="scan" transform="translate(740 150)"><rect width="120" height="80" rx="16"/><text x="60" y="48">opengrep…</text></g>
             <g class="node small" data-node="llm" transform="translate(740 260)"><rect width="120" height="80" rx="16"/><text x="60" y="48">LLM</text></g>
             <g class="node" data-node="redact" transform="translate(960 140)"><rect width="120" height="100" rx="18"/><text x="60" y="44" class="ic">▒</text><text x="60" y="74">redact</text></g>
             <g class="node end" data-node="report" transform="translate(1110 150)"><rect width="80" height="80" rx="40"/><text x="40" y="49">PDF</text></g>

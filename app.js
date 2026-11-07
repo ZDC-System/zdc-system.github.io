@@ -259,7 +259,7 @@
     const HITS = [
       { line: 5, key: 'token', sev: 'high', tool: 'gitleaks', redact: true },
       { line: 11, key: 'sqli', sev: 'critical', tool: 'llm_review' },
-      { line: 17, key: 'cmd', sev: 'critical', tool: 'semgrep' },
+      { line: 17, key: 'cmd', sev: 'critical', tool: 'opengrep' },
       { line: 21, key: 'path', sev: 'high', tool: 'llm_review' },
       { line: 24, key: 'debug', sev: 'medium', tool: 'deploy_rules' },
     ];
