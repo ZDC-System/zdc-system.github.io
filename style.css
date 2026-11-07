@@ -763,19 +763,19 @@ h2 { font-weight: 800; letter-spacing: -.03em; }
 /* Крупные панели — срез 14px */
 .term, .editor, .findings, .card, .pipe-wrap, .stage, .browser, .f-front, .f-back, .plan li, .contact,
 .notice, .dl, .ev-card, .ev-shot, .cloud-feats li, .intro-feats li, .lightbox img {
-  border-radius: 0; clip-path: var(--ch-l);
+  border-radius: 0; clip-path: var(--ch-l); --edge-k: var(--cut-l);
 }
 /* Кнопки, плашки, вложенные блоки — 10px */
 .btn, .btn.big, .intro-cta .btn, .fd, .card-art, .facts div, .seal, .box, .steps li, .code, .toast,
 .art-pentest .cage, .guide li::before, .ev-shot.mobile, .phone-shot img {
-  border-radius: 0; clip-path: var(--ch-m);
+  border-radius: 0; clip-path: var(--ch-m); --edge-k: var(--cut-m);
 }
 /* Мелкие метки, чипы, переключатели — 6px */
 .btn.small, .links a, .lang, .lang button, .gh, .eyebrow, .sources span, .card .tag, .url, .code-copy,
 .switch, .switch button, .tabs button, .hist-filter button, .pchip, .hero-ann, .hero-ann b, .soon-tag,
 .intro-badge, .ev-card li i, .ev-shot span, .theme-btn, .lb-close, .art-deploy i, .art-pentest .target,
 .redacted, .fence span {
-  border-radius: 0; clip-path: var(--ch-s);
+  border-radius: 0; clip-path: var(--ch-s); --edge-k: var(--cut-s);
 }
 /* Без среза, но и без скруглений: полосы, рамки с выносками наружу */
 .bar, .hp, .rail, .rail i, .lasers i, .art-code span, .art-pentest .shot, .fence, .note, .cloud-note,
@@ -812,31 +812,43 @@ body::after {
 @media (max-width: 700px) { body::after { width: 60vw; right: -20vw; } }
 /* Узлы схемы конвейера (SVG) */
 .node rect { rx: 0; ry: 0; clip-path: var(--ch-m); }
-/* Диагональ рамки на срезанных углах: clip-path срезает и рамку, поэтому её
-   дорисовывает фоновый градиент ровно по линии среза (в координатах padding-box). */
-.term, .editor, .findings, .card, .pipe-wrap, .browser, .plan li, .ev-card, .cloud-feats li, .intro-feats li {
-  --edge-k: var(--cut-l);
-}
-.btn.ghost, .btn.outline, .facts div, .box, .code, .seal, .steps li {
-  --edge-k: var(--cut-m);
-}
-.eyebrow, .intro-badge, .lang, .switch, .tabs button, .hist-filter button, .sources span, .code-copy, .pchip, .theme-btn {
-  --edge-k: var(--cut-s);
-}
+/* Диагональ рамки на срезанных углах. clip-path срезает и рамку, поэтому на
+   срезе её дорисовывает псевдоэлемент поверх содержимого: его собственная
+   рамка толщиной T = срез + рамка·√2 (border-style/color — inherit, т. е. ровно
+   цвет и стиль рамки элемента в любом состоянии: наведение, .on, тема) обрезана
+   до двух угловых треугольников, а срез самого элемента оставляет от них полосу
+   шириной в рамку. Срез --edge-k задан там же, где clip-path (см. выше), поэтому
+   всегда совпадает с ним; толщина рамки --edge-w — 1px, иначе задаётся ниже.
+   Новый срезанный элемент с рамкой — добавить в список псевдоэлементов (и в
+   position: relative, если он static); у .f-front ::after занят — у него ::before.
+   Прежде диагональ рисовал фоновый градиент — он пропадал под картинками и при
+   `background:` в других правилах; его место занимает background-image: none. */
 .term, .editor, .findings, .card, .pipe-wrap, .browser, .plan li, .ev-card, .cloud-feats li, .intro-feats li,
 .btn.ghost, .btn.outline, .facts div, .box, .code, .seal, .steps li,
 .eyebrow, .intro-badge, .lang, .switch, .tabs button, .hist-filter button, .sources span, .code-copy, .pchip, .theme-btn {
-  --edge-w: 1px;
-  --edge-d: calc((var(--edge-k) - 2 * var(--edge-w)) * .7071);
-  background-image:
-    linear-gradient(135deg, transparent calc(var(--edge-d) - var(--edge-w)), var(--edge-c, var(--line)) 0 calc(var(--edge-d) + .4px), transparent 0),
-    linear-gradient(315deg, transparent calc(var(--edge-d) - var(--edge-w)), var(--edge-c, var(--line)) 0 calc(var(--edge-d) + .4px), transparent 0);
+  background-image: none;
 }
-.intro-feats li { --edge-c: color-mix(in srgb, var(--c1) 30%, var(--line)); }
-.intro-feats li:hover { --edge-c: var(--c1); }
-.intro .term { --edge-c: color-mix(in srgb, var(--c1) 55%, var(--line)); }
-.intro-badge { --edge-c: color-mix(in srgb, var(--c1) 35%, var(--line)); }
-.btn.outline { --edge-c: var(--c1); --edge-w: 1.5px; }
-.btn.ghost:hover { --edge-c: var(--c1); }
-.card:hover { --edge-c: color-mix(in srgb, var(--accent) 50%, transparent); }
-.seal { --edge-c: color-mix(in srgb, var(--c2) 50%, transparent); }
+.findings, .browser, .editor, .term, .ev-card, .dl, .cloud-feats li, .intro-feats li, .facts div, .steps li,
+.lang, .switch, .tabs button, .hist-filter button, .sources span, .theme-btn, .eyebrow, .intro-badge,
+.ev-card li i, .art-deploy i { position: relative; }
+.term::after, .editor::after, .findings::after, .card::after, .pipe-wrap::after, .stage::after, .browser::after,
+.f-front::before, .f-back::after, .plan li::after, .contact::after, .notice::after, .dl::after, .ev-card::after,
+.ev-shot::after, .cloud-feats li::after, .intro-feats li::after,
+.btn.ghost::after, .btn.outline::after, .box::after, .code::after, .seal::after, .steps li::after, .facts div::after,
+.art-pentest .cage::after,
+.lang::after, .switch::after, .tabs button::after, .hist-filter button::after, .sources span::after, .code-copy::after,
+.pchip::after, .theme-btn::after, .eyebrow::after, .intro-badge::after, .lb-close::after, .ev-card li i::after,
+.art-deploy i::after {
+  --t: calc(var(--edge-k) + var(--edge-w, 1px) * 1.4142 + .3px);
+  content: ""; position: absolute; inset: calc(-1 * var(--edge-w, 1px)); z-index: 2; pointer-events: none;
+  box-sizing: border-box; background: none; border-width: var(--t);
+  border-style: inherit; border-color: inherit; transition: inherit;
+  clip-path: polygon(0 0, var(--t) 0, 0 var(--t), 0 0, 100% 100%, 100% calc(100% - var(--t)), calc(100% - var(--t)) 100%, 100% 100%);
+}
+.btn.outline { --edge-w: 1.5px; }
+.art-pentest .cage { --edge-w: 2px; }
+/* Телефон: рамка 6px — отступ обёртки (у img нет псевдоэлементов), а срез самой
+   картинки меньше на 6·(2 − √2), чтобы рамка и на диагонали была 6px. */
+.phone-frame { display: block; padding: 6px; background: var(--bg2); clip-path: var(--ch-m); cursor: zoom-in; }
+.phone-shot img { display: block; border: 0; outline: 0; box-shadow: none;
+  clip-path: polygon(calc(var(--cut-m) - 3.515px) 0, 100% 0, 100% calc(100% - var(--cut-m) + 3.515px), calc(100% - var(--cut-m) + 3.515px) 100%, 0 100%, 0 calc(var(--cut-m) - 3.515px)); }
